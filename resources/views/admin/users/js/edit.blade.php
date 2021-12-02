@@ -13,93 +13,102 @@
         }
     $(document).ready(function(){
          //for add new Country
-         $('#edit_administration').click(function(){
-            const name = $('#name').val();
+         $('#edit_user').click(function(){
+            const first_name = $('#first_name').val();
+            const last_name = $('#last_name').val();
             const email = $('#email').val();
             const phone = $('#phone').val();
             const password = $('#password').val();
             const confirm_password = $(`#confirm_password`).val();
-            const user_role = $('#user_role').val();
+            const cnic_number = $('#cnic_number').val();
+            // const sponcer_by = $('#sponcer_by').val();
+
             //applying validations here
-         if(user_role == 0){
+         if(!first_name || !$.trim(first_name).length){
                 $('#name_error').html("");
-                $('#user_role_error').html("user role Required*.");
-                return $('#user_role').focus()
-        }else if(!name || !$.trim(name).length){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
-                $('#name_error').html("user name Required*.");
-                return $('#name').focus()
-         }
-         else if(!email || !$.trim(email).length){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+                $('#first_name_error').html("First Name Required*.");
+                return $('#first_name').focus()
+        } else if(!last_name || !$.trim(last_name).length){
+                $('#first_name_error').html("");
+                $('#last_name_error').html("");
+                $('#last_name_error').html("Last Name Required*.");
+                return $('#last_name').focus()
+         } else if(!email || !$.trim(email).length){
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("Email Required*.");
                 return $('#email').focus()
-          }
-            else if(!phone || !$.trim(phone).length){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+          } else if(!phone || !$.trim(phone).length){
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("");
                 $('#phone_error').html("Phone No. Required*.");
                 return $('#phone').focus()
-            }
-            else if(!password || !$.trim(password).length){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+            } else if(!cnic_number || !$.trim(cnic_number).length){
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("");
+                $('#cnic_number_error').html("");
+                $('#cnic_number_error').html("CNIC Number Required*.");
+                return $('#cnic_number').focus()
+          } else if(!password || !$.trim(password).length){
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
+                $('#email_error').html("");
+                $('#cnic_number_error').html("");
                 $('#password_error').html("Password required");
                 return $('#password').focus();
             }else if(password.length <= 5){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("");
-                $('#password_error').html("");
+                $('#cnic_number_error').html("");
                 $('#password_error').html("password length should be equal or greater than 5 characters");
                 return $('#password').focus();
             }else if(!confirm_password){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("");
-                $('#password_error').html("");
+                $('#cnic_number_error').html("");
                 $('#confirm_password_error').html("");
                 $('#confirm_password_error').html("Confirm password required");
                 return $('#confirm_password').focus();
             }else if(confirm_password != password){
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("");
-                $('#password_error').html("");
+                $('#cnic_number_error').html("");
                 $('#confirm_password_error').html("");
                 $('#confirm_password_error').html("password does not match.");
                 return $('#confirm_password').focus();
              }else{
-                $('#user_role_error').html("");
-                $('#name_error').html("");
+                $('#last_name_error').html("");
+                $('#first_name_error').html("");
                 $('#email_error').html("");
-                $('#password_error').html("");
+                $('#cnic_number_error').html("");
                 $('#confirm_password_error').html("");
                 var formData = new FormData();
-                formData.append('name',name);
+                formData.append('first_name',first_name);
+                formData.append('last_name',last_name);
+                formData.append('cnic_number',cnic_number);
                 formData.append('email',email);
                 formData.append('phone',phone);
                 formData.append('password',password);
-                formData.append('user_role',user_role);
+                // formData.append('sponcer_by',sponcer_by);
                 formData.append('id',"{{ $user->id }}");
                 formData.append('_token',"{{ csrf_token() }}");
                  $.ajax({
-                     url:"{{ route('administration.update-process') }}",
+                     url:"{{ route('users.update') }}",
                      method:"POST",
                      data:formData,
                      contentType:false,
                      processData:false,
                      cache:false,
                      success:function(res){
+                   // return console.log(res);
                        if(res == "true"){
                         swal('success',"User Updated Successfully!",'success');
-                       }else if(res == "UserRole"){
-                          $('#user_role_error').html("User Role already exists.");
-                          return $('#user_role').focus()
+                        $('#user_role').val("");
                        }else if(res == "email")
                        {
                          $('#email_error').html("Email Address already exists.");

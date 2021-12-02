@@ -23,18 +23,21 @@ class UserController extends Controller
     //CREATE PROCESS START HERE//
     public function create_process(Request $request)
     {
-        $checkEgineerRequest=User::where('user_role',$request->user_role)->first();
         $checkEmail=User::where('email',$request->email)->first();
-        if(!empty($checkEgineerRequest)) return 'UserRole';
         if(!empty($checkEmail)) return 'email';
         $user= new User ;
-        $user->name= $request->name;
-        $user->email= $request->email;
-        $user->phone= $request->phone;
-        $user->password= $request->password;
-        $user->c_password= $request->password;
-        $user->user_role= 2;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email  = $request->email;
+        $user->phone = $request->phone;
+        $user->password = $request->password;
+        $user->real_password = $request->password;
+        $user->id_card_number = $request->cnic_number;
+        $user->sponcer_by = $request->sponcer_by;
         $user->save();
+        $right_code = random_int(10000, 99999).$user->id;
+        $left_code = $user->id.random_int(10000, 99999);
+        User::where('id',$user->id)->update(['left_code' => $left_code,'right_code' => $right_code]);
         return 'true';
     }
      //LOAD EDIT VIEW//
@@ -44,20 +47,14 @@ class UserController extends Controller
          return view('admin.users.edit',compact('user'));
      }
      //update Process start here//
-     public function update_process(Request $request)
+     public function update(Request $request)
      {
          //CHECK DUPLICATE EMAIL And USER ROLES//
-         $checkResource = User::all();
+         $checkResource = User::where('user_role',2)->get();
          //checking for duplicates Values
          foreach ($checkResource as $pro)
           {
-            // for duplidate UserRole
-             if ($request->user_role == $pro->user_role){
-                 if ($request->id != $pro->id) {
-                     return 'UserRole';
-                 }
-               }
-               // for duplidate email
+            // for duplidate email
              if ($request->email == $pro->email){
                 if ($request->id != $pro->id) {
                     return 'email';
@@ -65,12 +62,14 @@ class UserController extends Controller
               }
             }
         $user = User::where('id', $request->id)->first();
-        $user->name= $request->name;
-        $user->email= $request->email;
-        $user->phone= $request->phone;
-        $user->password= $request->password;
-        $user->c_password= $request->password;
-        $user->user_role= $request->user_role;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email  = $request->email;
+        $user->phone = $request->phone;
+        $user->password = $request->password;
+        $user->real_password = $request->password;
+        $user->id_card_number = $request->cnic_number;
+        $user->sponcer_by = $request->sponcer_by;
         $user->save();
         return 'true';
      }

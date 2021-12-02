@@ -77,10 +77,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/',[UserController::class,'index'])->name('users.list');
         Route::get('create', [UserController::class,'create'])->name('users.createView');
         Route::post('/create', [UserController::class,'create_process'])->name('users.create-process');
-        Route::get('/edit/{id}', [UserController::class,'editView']);
+        Route::get('/edit/{id}', [UserController::class,'edit'])->name('users.edit');
         Route::post('/update', [UserController::class,'update'])->name('users.update');
-        Route::post('/delete', [UserController::class,'delete_audio'])->name('users.delete');
-        Route::post('/change-status', [UserController::class,'change_audio_status'])->name('users.change-status');
+        Route::post('/delete', [UserController::class,'delete'])->name('users.delete');
+        Route::post('/change-status', [UserController::class,'change_status'])->name('users.change-status');
     });
 
      //routes for contact-support//

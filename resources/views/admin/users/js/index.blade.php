@@ -29,11 +29,11 @@
                 });
 
 
-         //delete zone here
-         $('body').delegate('#delete_country','click',function(){
+         //delete User here
+         $('body').delegate('#delete_user','click',function(){
               const id = $(this).find('input[name="id"]').val();
               swal({
-              title: "Do you want to delete this Country?",
+              title: "Do you want to delete this User?",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -46,7 +46,7 @@
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){
-                      swal("Country Deleted Successfully!", {
+                      swal("User Deleted Successfully!", {
                   icon: "success",
                   });
                   window.location.reload();

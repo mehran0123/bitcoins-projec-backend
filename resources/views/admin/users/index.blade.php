@@ -63,9 +63,10 @@
         @foreach ($users as $key => $user)
         <tr>
             <td>{{ ++$key }}</td>
-            <td>{{ $user->name }}</td>
+            <td>{{ $user->first_name}}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->c_password }}</td>
+            <td>{{ $user->real_password }}</td>
+            <td>{{ $user->points !='' ?  $user->points : 0 }}</td>
             <td class="text-center">
                 <input type="hidden" name="id" value="{{ $user->id }}">
                 @if ($user->is_active == 1)
@@ -75,11 +76,11 @@
                 @endif
             </td>
             <td class="align-middle text-center">
-                <a href="{{ route('administration.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-icon btn-secondary">
+                <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-icon btn-secondary">
                     <i class="fa fa-pencil-alt text-primary" style="padding-top: 7px !important"></i>
                 </a>
                 <a href="#">
-                    <span class="sr-only">Edit</span></a> <a href="#" id="delete_administration" class="btn btn-sm btn-icon btn-secondary">
+                    <span class="sr-only">Edit</span></a> <a href="#" id="delete_user" class="btn btn-sm btn-icon btn-secondary">
                         <i class="far fa-trash-alt" style="padding-top: 7px !important;color:red"></i> <span class="sr-only">Remove</span>
                         <input type="hidden" name="id" value="{{ $user->id }}">
                     </a>
