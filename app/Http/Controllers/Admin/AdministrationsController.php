@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Users;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-
-class UserController extends Controller
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+class AdministrationsController extends Controller
 {
     public function index()
     {
 
-        $users = User::where('user_role',2)->orderBy('id','DESC')->get();
+        $administrations=User::where('user_role','!=',1)->where('user_role','!=',2)->orderBy('id','DESC')->get();
        // return $administrations;
-        return view('admin.users.index',compact('users'));
+        return view('admin.administrations.index',compact('administrations'));
     }
     //LOAD CREATE VIEW//
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.administrations.create');
     }
     //CREATE PROCESS START HERE//
     public function create_process(Request $request)
@@ -33,7 +33,7 @@ class UserController extends Controller
         $user->phone= $request->phone;
         $user->password= $request->password;
         $user->c_password= $request->password;
-        $user->user_role= 2;
+        $user->user_role= $request->user_role;
         $user->save();
         return 'true';
     }
@@ -41,7 +41,7 @@ class UserController extends Controller
      public function edit($id)
      {
         $user = User::where('id', $id)->first();
-         return view('admin.users.edit',compact('user'));
+         return view('admin.administrations.edit',compact('user'));
      }
      //update Process start here//
      public function update_process(Request $request)

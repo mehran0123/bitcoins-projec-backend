@@ -42,7 +42,7 @@
               if (willDelete) {
 
                   $.ajax({
-                  url:"{{ route('users.delete') }}",
+                  url:"{{ route('country.delete') }}",
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){
@@ -68,7 +68,7 @@
               const option = $(this);
 
               $.ajax({
-                  url:"{{ route('users.change-status') }}",
+                  url:"{{ route('country.change-status') }}",
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){

@@ -1,7 +1,7 @@
 @extends('layouts.master')
-@section('title','Users list')
-{{-- @section('users-has-open','has-open has-active') --}}
-@section('users','has-active')
+@section('title','Administration list')
+@section('administrations-has-open','has-open has-active')
+@section('administration','has-active')
 <style>
     i{
         cursor: pointer;
@@ -26,16 +26,16 @@
                 <a href="{{ URL::to('/admin/dashboard') }}"></i>@lang('translation.dashboard')</a>
               </li>
               <li class="breadcrumb-item">
-                <a href="#">Manage Users</a>
+                <a href="#">Manage Administration</a>
               </li>
               <li class="breadcrumb-item active">
-                <a href="{{ route('users.list') }}">Users</a>
+                <a href="{{ route('administration.list') }}">Administration</a>
               </li>
           </ol>
         </nav><!-- /.breadcrumb -->
         <!-- title -->
-        <h1 class="page-title">Users List
-            <a href="{{ route('users.createView') }}" class="btn btn-sm btn-success float-right">Create</a>
+        <h1 class="page-title">Administration List
+            <a href="{{ route('administration.create') }}" class="btn btn-sm btn-success float-right">Create</a>
         </h1>
 
       </header><!-- /.page-title-bar -->
@@ -52,20 +52,31 @@
             <th class="text-left"> ID </th>
             <th > Name </th>
             <th > Email </th>
-            <th > Password </th>
-            <th > Points   </th>
+            {{-- <th > Password </th> --}}
+            <th > Role </th>
             <th class="text-center"> Status </th>
             <th class="text-center"> Action </th>
         </tr>
       </thead>
       <tbody>
-        @if (count($users) > 0)
-        @foreach ($users as $key => $user)
+        @if (count($administrations) > 0)
+        @foreach ($administrations as $key => $user)
         <tr>
             <td>{{ ++$key }}</td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->c_password }}</td>
+            {{-- <td>{{ $user->c_password }}</td> --}}
+            <td>
+                @if($user->user_role == 3)
+                {{ 'Admin' }}
+                @elseif($user->user_role == 4)
+                {{ 'Standard User' }}
+                @elseif($user->user_role == 5)
+                {{ 'Basic User' }}
+                @elseif($user->user_role == 6)
+                {{ 'Accountant' }}
+                @endif
+            </td>
             <td class="text-center">
                 <input type="hidden" name="id" value="{{ $user->id }}">
                 @if ($user->is_active == 1)
@@ -92,12 +103,8 @@
         <tr>
             <th class="text-left"> ID </th>
             <th > Name </th>
-            <th > Email </th>
-            <th > Password </th>
-            <th > Points   </th>
             <th class="text-center"> Status </th>
             <th class="text-center"> Action </th>
-        </tr>
       </tfoot>
     </table><!-- /.table -->
   </div><!-- /.card-body -->
@@ -108,7 +115,7 @@
     </div><!-- /.page-inner -->
   </div><!-- /.page -->
 </div>
-@include('admin.users.js.index')
+@include('admin.countries.js.index')
 @endsection
 
 

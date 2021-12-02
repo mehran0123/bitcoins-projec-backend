@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Users\UserController;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\Route;
 /*
@@ -71,56 +72,17 @@ Route::group(['prefix' => 'admin'], function () {
         return redirect()->back();
 
     });
-    //routes for Audio Categories//
-    Route::group(['prefix' => 'category'], function () {
-        Route::get('/', 'Categories@index')->name('categories.list');
-        Route::get('create', 'Categories@createView')->name('category.createView');
-        Route::post('/create', 'Categories@create')->name('category.create');
-        Route::get('/edit/{id}', 'Categories@editView');
-        Route::get('/view-category-courses/{id}', 'Categories@ViewCategoryCourese');
-        Route::post('/update', 'Categories@update')->name('category.update');
-        Route::post('/delete', 'Categories@delete_category')->name('category.delete');
-        Route::post('/change-status', 'Categories@change_category_status')->name('category.change-status');
+    //routes for USERS//
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/',[UserController::class,'index'])->name('users.list');
+        Route::get('create', [UserController::class,'create'])->name('users.createView');
+        Route::post('/create', [UserController::class,'create_process'])->name('users.create-process');
+        Route::get('/edit/{id}', [UserController::class,'editView']);
+        Route::post('/update', [UserController::class,'update'])->name('users.update');
+        Route::post('/delete', [UserController::class,'delete_audio'])->name('users.delete');
+        Route::post('/change-status', [UserController::class,'change_audio_status'])->name('users.change-status');
     });
-    //routes for Courses Categories//
-    Route::group(['prefix' => 'courses-types'], function () {
-        Route::get('/', 'CoursesTypesController@index')->name('courses-type.list');
-        Route::get('create', 'CoursesTypesController@createView')->name('courses-type.createView');
-        Route::post('/create', 'CoursesTypesController@create')->name('courses-type.create');
-        Route::get('/edit/{id}', 'CoursesTypesController@editView');
-        Route::get('/view-course-audios/{id}', 'CoursesTypesController@ViewCourseAudios');
-        Route::post('/update', 'CoursesTypesController@update')->name('courses-type.update');
-        Route::post('/delete', 'CoursesTypesController@delete_courses')->name('courses-type.delete');
-        Route::post('/change-status', 'CoursesTypesController@change_courses_status')->name('courses-type.change-status');
-    });
-    //routes for audios//
-    Route::group(['prefix' => 'audios'], function () {
-        Route::get('/', 'AudioController@index')->name('audios.list');
-        Route::get('create', 'AudioController@createView')->name('audios.createView');
-        Route::post('/create', 'AudioController@create')->name('audios.create');
-        Route::get('/edit/{id}', 'AudioController@editView');
-        Route::post('/update', 'AudioController@update')->name('audios.update');
-        Route::post('/delete', 'AudioController@delete_audio')->name('audios.delete');
-        Route::post('/change-status', 'AudioController@change_audio_status')->name('audios.change-status');
-    });
-     //routes for audios//
-     Route::group(['prefix' => 'courses-audios'], function () {
-        Route::get('/', 'CoursesAudiosController@index')->name('courses-audios.list');
-        Route::get('create', 'CoursesAudiosController@createView')->name('courses-audios.createView');
-        Route::post('/create', 'CoursesAudiosController@create')->name('courses-audios.create');
-        Route::get('/edit/{id}', 'CoursesAudiosController@editView');
-        Route::post('/update', 'CoursesAudiosController@update')->name('courses-audios.update');
-        Route::post('/delete', 'CoursesAudiosController@delete_audio')->name('courses-audios.delete');
-        Route::post('/change-status', 'CoursesAudiosController@change_audio_status')->name('courses-audios.change-status');
-    });
-    //routes for privacy-policy//
-    Route::group(['prefix' => 'privacy-policy'], function () {
-        Route::get('/', 'PrivacyController@index')->name('privacy-policy.list');
-        Route::get('create', 'PrivacyController@createView')->name('privacy-policy.createView');
-        Route::post('/create', 'PrivacyController@create')->name('privacy-policy.create');
-        Route::get('/edit/{id}', 'PrivacyController@editView');
-        Route::post('/update', 'PrivacyController@update')->name('privacy-policy.update');
-    });
+
      //routes for contact-support//
      Route::group(['prefix' => 'contact-supports'], function () {
         Route::get('/', 'ContactSupportController@index')->name('contact-support.list');

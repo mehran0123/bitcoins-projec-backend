@@ -171,8 +171,8 @@
                   <a href="{{ URL::to('/admin/dashboard') }}" class="menu-link text-green"><span class="fas fa-home"></span> <span class="menu-text">@lang('translation.dashboard')</span></a>
                 </li><!-- /.menu-item -->
                  <!-- .menu-item -->
-                 <li class="menu-item @yield('categories')">
-                  <a href="#" class="menu-link"><span class="oi oi-cloud-upload"></span> <span class="menu-text">Users</span></a>
+                 <li class="menu-item @yield('users')">
+                  <a href="{{ route('users.list') }}" class="menu-link"><span class="oi oi-cloud-upload"></span> <span class="menu-text">Users</span></a>
                 </li>
                 <li class="menu-item @yield('audios')">
                     <a href="#" class="menu-link"><span class="oi oi-audio-spectrum"></span> <span class="menu-text">Deposit</span></a>
