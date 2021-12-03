@@ -171,13 +171,15 @@
                   <a href="{{ URL::to('/admin/dashboard') }}" class="menu-link text-green"><span class="fas fa-home"></span> <span class="menu-text">@lang('translation.dashboard')</span></a>
                 </li><!-- /.menu-item -->
                  <!-- .menu-item -->
+                 @if(Auth::user()->user_role !=2)
                  <li class="menu-item @yield('users')">
                   <a href="{{ route('users.list') }}" class="menu-link"><span class="oi oi-cloud-upload"></span> <span class="menu-text">Users</span></a>
                 </li>
-                <li class="menu-item @yield('audios')">
-                    <a href="#" class="menu-link"><span class="oi oi-audio-spectrum"></span> <span class="menu-text">Deposit</span></a>
+                @endif
+                <li class="menu-item @yield('deposist')">
+                    <a href="{{ route('deposits.list') }}" class="menu-link"><span class="oi oi-audio-spectrum"></span> <span class="menu-text">Deposit</span></a>
                 </li>
-                <li class="menu-item has-child @yield('courses-has-open')">
+                {{-- <li class="menu-item has-child @yield('courses-has-open')">
                     <a href="#" class="menu-link"><span class="oi oi-list"></span> <span class="menu-text">Withdraw</span></a> <!-- child menu -->
                     <ul class="menu">
                         <li class="menu-item @yield('course-types')">
@@ -187,10 +189,10 @@
                         <a href="#" class="menu-link"> <span class="menu-text text-green">Deposit</span></a>
                    </li>
                     </ul><!-- /child menu -->
-                  </li>
+                  </li> --}}
             <li class="menu-item @yield('contact-support')">
-               <a href="#" class="menu-link"><span class="oi oi-envelope-closed"></span> <span class="menu-text">Withdraw</span></a>
-            </li>
+                <a href="#" class="menu-link"><span class="oi oi-envelope-closed"></span> <span class="menu-text">Withdraw</span></a>
+             </li>
         </li><!-- /.menu-item -->
              </ul><!-- /.menu -->
             </nav><!-- /.stacked-menu -->

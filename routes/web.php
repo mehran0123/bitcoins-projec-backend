@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,17 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update', [UserController::class,'update'])->name('users.update');
         Route::post('/delete', [UserController::class,'delete'])->name('users.delete');
         Route::post('/change-status', [UserController::class,'change_status'])->name('users.change-status');
+    });
+
+     //ROUTES FOR DEPOSITS//
+    Route::group(['prefix' => 'deposits'], function () {
+        Route::get('/',[DepositController::class,'index'])->name('deposits.list');
+        Route::get('create', [DepositController::class,'create'])->name('deposits.createView');
+        Route::post('/create', [DepositController::class,'create_process'])->name('deposits.create-process');
+        Route::get('/edit/{id}', [DepositController::class,'edit'])->name('deposits.edit');
+        Route::post('/update', [DepositController::class,'update'])->name('deposits.update');
+        Route::post('/delete', [DepositController::class,'delete'])->name('deposits.delete');
+        Route::post('/change-status', [DepositController::class,'change_status'])->name('deposits.change-status');
     });
 
      //routes for contact-support//

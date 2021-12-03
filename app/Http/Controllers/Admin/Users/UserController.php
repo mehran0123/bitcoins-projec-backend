@@ -5,19 +5,26 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
     public function index()
     {
-
+        if(Auth::user()->role_id != 1){
+            return '404,Unauthorized User';
+        }
         $users = User::where('user_role',2)->orderBy('id','DESC')->get();
-       // return $administrations;
+
         return view('admin.users.index',compact('users'));
     }
     //LOAD CREATE VIEW//
     public function create()
     {
+        if(Auth::user()->role_id != 1){
+            return '404,Unauthorized User';
+        }
         return view('admin.users.create');
     }
     //CREATE PROCESS START HERE//
@@ -43,6 +50,9 @@ class UserController extends Controller
      //LOAD EDIT VIEW//
      public function edit($id)
      {
+        if(Auth::user()->role_id != 1){
+            return '404,Unauthorized User';
+        }
         $user = User::where('id', $id)->first();
          return view('admin.users.edit',compact('user'));
      }
