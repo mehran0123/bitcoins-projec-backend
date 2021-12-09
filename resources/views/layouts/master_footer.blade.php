@@ -4,11 +4,11 @@
 </footer>
 </main><!-- /.auth -->
 <!-- BEGIN BASE JS -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/popper.js/umd/popper.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
+<script src="{{ URL::to('/public/admin/vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{ URL::to('/public/admin/vendor/popper.js/umd/popper.min.js')}}"></script>
+<script src="{{ URL::to('/public/admin/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
 <!-- BEGIN PLUGINS JS -->
-<script src="assets/vendor/particles.js/particles.js"></script>
+<script src="{{ URL::to('/public/admin/vendor/particles.js/particles.js')}}"></script>
 <script>
 /**
  * Keep in mind that your scripts may not always be executed after the theme is completely ready,
