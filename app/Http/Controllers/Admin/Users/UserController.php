@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function index()
     {
-        if(Auth::user()->role_id != 1){
+        if(Auth::user()->user_role != 1){
             return '404,Unauthorized User';
         }
         $users = User::where('user_role',2)->orderBy('id','DESC')->get();
@@ -22,7 +22,7 @@ class UserController extends Controller
     //LOAD CREATE VIEW//
     public function create()
     {
-        if(Auth::user()->role_id != 1){
+        if(Auth::user()->user_role != 1){
             return '404,Unauthorized User';
         }
         return view('admin.users.create');
@@ -50,7 +50,7 @@ class UserController extends Controller
      //LOAD EDIT VIEW//
      public function edit($id)
      {
-        if(Auth::user()->role_id != 1){
+        if(Auth::user()->user_role != 1){
             return '404,Unauthorized User';
         }
         $user = User::where('id', $id)->first();

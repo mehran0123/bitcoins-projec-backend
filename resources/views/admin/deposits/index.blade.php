@@ -57,25 +57,36 @@
        <td>
         {{ $deposit->amount }}
        </td>
+       <td>
+        <img src="{{ asset('/storage/app') }}/{{ $deposit->slip }}" height="50px">
+       </td>
       <td class="text-center">
+          @if(Auth::user()->role_id == 1)
           <input type="hidden" name="id" value="{{ $deposit->id }}">
           @if ($deposit->status == 1)
           <i class="material-icons text-success"  id="change_status">check_box</i>
           @else
           <i class="material-icons text-danger" id="change_status">check_box_outline_blank</i>
           @endif
+          @else
+          @if ($deposit->status == 1)
+            {{'Completed'}}
+          @else
+            {{'Pending'}}
+          @endif
+          @endif
       </td>
       <td class="align-middle text-center">
-          <a href="{{ URL::to('admin/deposits/edit') }}/{{ $deposit->id  }}" id="update_catgory-missing" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="Edit deposit">
-              <i class="fa fa-pencil-alt text-primary" style="padding-top: 7px !important"></i>
+          <a href="{{ URL::to('admin/deposits/edit') }}/{{ $deposit->id  }}" id="update_catgory-missing" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="View deposit">
+              <i class="fa fa-eye text-primary" style="padding-top: 7px !important"></i>
           </a>
           <a href="#">
               <span class="sr-only">Edit</span>
           </a>
-          <a href="#" id="delete_deposit" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="Delete deposit">
+          {{-- <a href="#" id="delete_deposit" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="Delete deposit">
             <i class="far fa-trash-alt" style="padding-top: 7px !important;color:red"></i> <span class="sr-only">Remove</span>
             <input type="hidden" name="id" value="{{ $deposit->id }}">
-          </a>
+          </a> --}}
         </td>
     </tr>
     @endif

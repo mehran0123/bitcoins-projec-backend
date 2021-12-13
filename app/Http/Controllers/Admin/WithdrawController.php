@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Deposit;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-
-class DepositController extends Controller
+class WithdrawController extends Controller
 {
     public function index()
     {
@@ -37,17 +36,17 @@ class DepositController extends Controller
 
         //**UPDATING POINTS HERE*/
          $depositer_points = User::where('id',Auth::user()->id)->first();
-        // $total_points = $request->deposit_amount + $depositer_points->total_points;
-        // User::where('id',Auth::user()->id)->update(['total_points' =>  $total_points]);
+         $total_points = $request->deposit_amount + $depositer_points->total_points;
+         User::where('id',Auth::user()->id)->update(['total_points' =>  $total_points]);
 
         //**UPDATING Sponcered POINTS HERE*/
         if($depositer_points->sponcer_by !=''){
            $reffer = User::where('left_code',$depositer_points->sponcer_by)->first();
             if($reffer){
-                $total_points = $reffer->left_points + $request->deposit_amount ;  // Total Deposited Amounts Points
+                $total_points = $reffer->left_points + ($request->deposit_amount / 100) * 5;  // 5% of deposit amount
                  User::where('id',$reffer->id)->update(['left_points' =>  $total_points]);
             }else{
-                $total_points = $reffer->right_points + $request->deposit_amount;  // Total Deposited Amounts Points
+                $total_points = $reffer->right_points + ($request->deposit_amount / 100) * 5;  // 5% of deposit amount
                  User::where('id',$reffer->id)->update(['right_points' =>  $total_points]);
             }
         }
