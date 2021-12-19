@@ -50,7 +50,7 @@
                ">
                <div class="btn btn-secondary fileinput-button" style="line-height: 2;height: 50px;">
                   <i class="fa fa-plus fa-fw"></i> <span>Add File</span>
-                  <input id="fileupload-btn-one" type="file" name="file-one" accept="image/*">
+                  <input id="slip-image" type="file" name="file-one" accept="image/*">
                </div>
                <div class="form-group" style="
                   display: block;
@@ -65,7 +65,7 @@
             <small id="image_one_error" class="text-danger"></small>
        </div>
      <hr>
-      <button class="btn btn-primary btn-lg btn-block" type="button" id="category_form">Add Category</button>
+      <button class="btn btn-primary btn-lg btn-block" type="button" id="add_deposit">Add Deposit Record</button>
     </form><!-- /form .needs-validation -->
     </div><!-- /.card-body -->
   </div>

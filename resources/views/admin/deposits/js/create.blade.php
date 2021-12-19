@@ -3,17 +3,19 @@
 <script>
     $(document).ready(function(){
 
-        $('#category_form').click(function(){
+        $('#add_deposit').click(function(){
             const deposit_amount = $('#deposit_amount').val();
             var slip = $('input[name="file-one"]').val();
-            slip = document.getElementById('fileupload-btn-one').files[0];
             //applying validations here
             if(!deposit_amount != "" || !$.trim(deposit_amount).length){
                  $('#deposit_amount_error').html("Deposit Amount Required*");
-                 return $('#name_english').focus();
+                 return $('#deposit_amount').focus();
+            } else if(!slip){
+                $('#image_one_error').html("Deposit Slip Required*");
+                 return $('#slip-image').focus();
             }else{
                    $('#deposit_amount_error').html("");
-               slip = document.getElementById('fileupload-btn-one').files[0];
+               slip = document.getElementById('slip-image').files[0];
                 var formData = new FormData();
                 formData.append('deposit_amount',deposit_amount);
                 formData.append('slip',slip);
@@ -26,8 +28,8 @@
                      processData:false,
                      cache:false,
                      success:function(res){
-                       console.log(res);
-                       if(res == "success"){
+                     return  console.log(res);
+                       if(res == "true"){
                         swal('success',"Deposit Record Created Successfully!",'success');
                         $('#deposit_amount').val('');
                         $('input[name="file-one"]').val('');
@@ -56,7 +58,7 @@
             reader.readAsDataURL(input.files[0]); // convert to base64 string
         }
         }
-        $("#fileupload-btn-one").change(function() {
+        $("#slip-image").change(function() {
            readURL(this);
         });
 
