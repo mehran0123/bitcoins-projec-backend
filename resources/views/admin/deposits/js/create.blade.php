@@ -28,7 +28,7 @@
                      processData:false,
                      cache:false,
                      success:function(res){
-                     return  console.log(res);
+                       console.log(res);
                        if(res == "true"){
                         swal('success',"Deposit Record Created Successfully!",'success');
                         $('#deposit_amount').val('');
