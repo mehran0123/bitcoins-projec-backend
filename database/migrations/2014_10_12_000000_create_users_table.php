@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->double('left_points')->default(0);
             $table->double('right_points')->default(0);
             $table->double('total_points')->default(0);
+            $table->double('bonus_points')->default(0);
             $table->string('rank')->nullable();
             $table->integer('user_role')->default(2)->comment('1=admin, 2=user');
             $table->integer('is_active')->default(1)->comment('1=active, 0=deactive');
