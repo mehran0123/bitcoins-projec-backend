@@ -130,7 +130,23 @@ class DepositController extends Controller
                           $bst_bonus = ($bst_bonus / 100) * 4 ;
                           $bst_bonus = $right_reffer->bonus_points + $bst_bonus;
                           User::where('id',$right_reffer->id)->update(['bonus_points' => $bst_bonus]);
+                          //***RANT CALCULTION START HERE */
+                          if($reffer->totol_points == $right_reffer->total_points){
+
+                            if($right_reffer->total_points >= 2000 && $right_reffer->total_points < 4500){
+
+                                $rank_bonus = $depositer_parent->bonus_points + 100 ;
+
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Bronze','bonus_points','bonus_points' => $rank_bonus]);
+
+                            }elseif($right_reffer->total_points >= 4500 && $right_reffer->total_points < 10000){
+
+                               // $rank_bonus = $depositer_parent->bonus_points + 100 ;    /// FOR BIKE//
+
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Gold']);
+                            }
                         }
+                        //***RANT CALCULTION END HERE */
                       }
                 }
 
@@ -141,6 +157,7 @@ class DepositController extends Controller
             //     $bst_flag = 1;
             //      break;
             // }
+
         }
       return 'true';
     }
