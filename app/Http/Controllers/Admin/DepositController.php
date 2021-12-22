@@ -28,7 +28,6 @@ class DepositController extends Controller
     //CREATE PROCESS START HERE//
     public function create_process(Request $request)
     {
-      //  return $request->all();
         $deposit = new Deposit ;
         $deposit->amount = $request->deposit_amount;
         $deposit->slip = $request->file('slip')->store('SlipImages');
@@ -37,7 +36,7 @@ class DepositController extends Controller
 
         //**UPDATING POINTS HERE*/
          $depositer_points = User::where('id',Auth::user()->id)->first();
-
+         $depositer_parent = User::where('id',Auth::user()->id)->first();
          $total_points = $request->deposit_amount + $depositer_points->total_points;
 
          $parent_node = User::where('left_code',$depositer_points->sponcer_by)->first();
@@ -46,7 +45,7 @@ class DepositController extends Controller
 
             $total_points = $parent_node->bonus_points + ($request->deposit_amount * 0.05);  // 5% of deposit amount
 
-           // User::where('id',$parent_node->id)->update(['bonus_points' =>  $total_points]);
+            User::where('id',$parent_node->id)->update(['bonus_points' =>  $total_points]);
 
         }else{
 
@@ -54,7 +53,7 @@ class DepositController extends Controller
 
             $total_points = $parent_node->bonus_points + ($request->deposit_amount * 0.05);  // 5% of deposit amount
 
-           // User::where('id',$parent_node->id)->update(['bonus_points' =>  $total_points]);
+            User::where('id',$parent_node->id)->update(['bonus_points' =>  $total_points]);
 
         }
 
@@ -74,26 +73,6 @@ class DepositController extends Controller
 
                     $depositer_points = $reffer;
 
-                    //****APPLYING VALIDATION FOR BST****//
-                    // $check_left_node = User::where('left_code',$reffer->sponcer_by)->first();
-                    // $check_right_node = User::where('right_code',$reffer->sponcer_by)->first();
-                    // return $check_left_node;
-                    if($reffer->left_points != 0 &&  $reffer->right_points != 0){
-                      $bst_points =   $reffer->left_points - $reffer->right_points;
-                    //  return $bst_points;
-                      if($bst_points <= 0 ){
-                       $bst_bonus =  $reffer->left_points  * 2;
-                       $bst_bonus = ($bst_bonus / 100) * 4 ;
-                    //    return $bst_bonus;
-                       User::where('id',$reffer->id)->update(['bonus_points' => $bst_bonus]);
-                      }else{
-                        $bst_bonus =  $reffer->right_points * 2;
-                        $bst_bonus = ($bst_bonus / 100) * 4 ;
-                     //  return $bst_bonus;
-                        User::where('id',$reffer->id)->update(['bonus_points' => $bst_bonus]);
-                      }
-                    }
-                    //****APPLYING VALIDATION FOR BST****//
                 }else{
                    $reffer = User::where('right_code',$depositer_points->sponcer_by)->first();
 
@@ -111,48 +90,59 @@ class DepositController extends Controller
         }
 
         $bst_flag = 0;
-
+        $bst_points = 0;
         while($bst_flag == 0){
              //**UPDATING Sponcered POINTS HERE*/
-            if($depositer_points->sponcer_by !=''){
-
-                $reffer = User::where('left_code',$depositer_points->sponcer_by)->first();
-
+            if($depositer_parent->sponcer_by !=''){
+                $reffer = User::where('left_code',$depositer_parent->sponcer_by)->first();
+                $right_reffer = User::where('right_code',$depositer_parent->sponcer_by)->first();
+                //reffer is parent node of current node
                 if($reffer){
-
                     //****APPLYING VALIDATION FOR BST****//
-                    // $check_left_node = User::where('left_code',$reffer->sponcer_by)->first();
-                    // $check_right_node = User::where('right_code',$reffer->sponcer_by)->first();
-                    // return $check_left_node;
                     if($reffer->left_points != 0 &&  $reffer->right_points != 0){
+                        // 170 - 200 => -30
+                        // (170 * 2) * 4%
                       $bst_points =   $reffer->left_points - $reffer->right_points;
-                    //  return $bst_points;
                       if($bst_points <= 0 ){
-                        $bst_points =   $reffer->right_points - $reffer->left_points ;
-                        $bst_bonus =  $bst_points  * 2;
+                        $bst_bonus =  $reffer->left_points  * 2;
                         $bst_bonus = ($bst_bonus / 100) * 4 ;
-                    //    return $bst_bonus;
+                        $bst_bonus = $reffer->bonus_points + $bst_bonus;
                        User::where('id',$reffer->id)->update(['bonus_points' => $bst_bonus]);
                       }else{
                         $bst_bonus =  $reffer->right_points * 2;
                         $bst_bonus = ($bst_bonus / 100) * 4 ;
-                     //  return $bst_bonus;
+                        $bst_bonus = $reffer->bonus_points + $bst_bonus;
                         User::where('id',$reffer->id)->update(['bonus_points' => $bst_bonus]);
                       }
                     }
                     //****APPLYING VALIDATION FOR BST****//
+                }else if($right_reffer){
+                    if($right_reffer->left_points != 0 &&  $right_reffer->right_points != 0){
+                        $bst_points =   $right_reffer->left_points - $right_reffer->right_points;
+                        if($bst_points <= 0 ){
+                          $bst_points =   $right_reffer->right_points - $right_reffer->left_points ;
+                          $bst_bonus =  $bst_points  * 2;
+                          $bst_bonus = ($bst_bonus / 100) * 4 ;
+                          $bst_bonus = $right_reffer->bonus_points + $bst_bonus;
+                         User::where('id',$right_reffer->id)->update(['bonus_points' => $bst_bonus]);
+                        }else{
+                          $bst_bonus =  $right_reffer->right_points * 2;
+                          $bst_bonus = ($bst_bonus / 100) * 4 ;
+                          $bst_bonus = $right_reffer->bonus_points + $bst_bonus;
+                          User::where('id',$right_reffer->id)->update(['bonus_points' => $bst_bonus]);
+                        }
+                      }
                 }
-            }else{
-                $bst_flag = 1;
-                 break;
-            }
+
+             }
+             $bst_flag = 1;
+             break;
+           // else{
+            //     $bst_flag = 1;
+            //      break;
+            // }
         }
-
-
-
-
-
-        return 'true';
+      return 'true';
     }
      //LOAD EDIT VIEW//
      public function edit($id)

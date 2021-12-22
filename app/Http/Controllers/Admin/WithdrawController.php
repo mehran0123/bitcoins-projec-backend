@@ -6,29 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Deposit;
+use App\Models\Withdraw;
 use App\Models\User;
 class WithdrawController extends Controller
 {
     public function index()
     {
         if(Auth::user()->user_role == 1){
-           $deposits = Deposit::orderBy('id','DESC')->get();
+           $deposits = Withdraw::orderBy('id','DESC')->get();
         }else{
-           $deposits = Deposit::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get();
+           $deposits = Withdraw::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get();
         }
 
-        return view('admin.deposits.index',compact('deposits'));
+        return view('admin.withdraws.index',compact('deposits'));
     }
     //LOAD CREATE VIEW//
     public function create()
     {
-        return view('admin.deposits.create');
+        return view('admin.withdraws.create');
     }
     //CREATE PROCESS START HERE//
     public function create_process(Request $request)
     {
       //  return $request->all();
-        $deposit = new Deposit ;
+        $deposit = new Withdraw ;
         $deposit->amount = $request->deposit_amount;
         $deposit->slip = $request->file('slip')->store('SlipImages');
         $deposit->user_id = Auth::user()->id;
@@ -55,14 +56,14 @@ class WithdrawController extends Controller
      //LOAD EDIT VIEW//
      public function edit($id)
      {
-        $deposit = Deposit::where('id', $id)->first();
-         return view('admin.deposits.edit',compact('deposit'));
+        $deposit = Withdraw::where('id', $id)->first();
+         return view('admin.withdraws.edit',compact('deposit'));
      }
      //update Process start here//
      public function update(Request $request)
      {
 
-        $deposit = Deposit::where('id', $request->id)->first();
+        $deposit = Withdraw::where('id', $request->id)->first();
         $deposit->amount = $request->deposit_amount;
         $deposit->slip = $request->hasFile('slip') ? $request->file('slip')->store('SlipImages') : $deposit->slip ;
         $deposit->save();
@@ -71,12 +72,12 @@ class WithdrawController extends Controller
      }
      //for changing status
      public function change_status(Request $request){
-        $ctype = Deposit::where('id', $request->id)->first();
+        $ctype = Withdraw::where('id', $request->id)->first();
 
         if ($ctype->status == 1) {
-            Deposit::where('id', $request->id)->update(['status' => 0]);
+            Withdraw::where('id', $request->id)->update(['status' => 0]);
         } else {
-            Deposit::where('id', $request->id)->update(['status' => 1]);
+            Withdraw::where('id', $request->id)->update(['status' => 1]);
         }
 
         echo $ctype->status;
