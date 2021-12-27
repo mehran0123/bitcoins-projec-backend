@@ -130,9 +130,9 @@ class DepositController extends Controller
                           $bst_bonus = ($bst_bonus / 100) * 4 ;
                           $bst_bonus = $right_reffer->bonus_points + $bst_bonus;
                           User::where('id',$right_reffer->id)->update(['bonus_points' => $bst_bonus]);
-                          //***RANT CALCULTION START HERE */
-                          if($reffer->totol_points == $right_reffer->total_points){
-
+                          //***RANK CALCULTION START HERE */
+                          if($reffer->total_points == $right_reffer->total_points){
+                            //**FOR BRONZ RANK (2000-4449) */
                             if($right_reffer->total_points >= 2000 && $right_reffer->total_points < 4500){
 
                                 $rank_bonus = $depositer_parent->bonus_points + 100 ;
@@ -140,10 +140,34 @@ class DepositController extends Controller
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Bronze','bonus_points','bonus_points' => $rank_bonus]);
 
                             }elseif($right_reffer->total_points >= 4500 && $right_reffer->total_points < 10000){
-
-                               // $rank_bonus = $depositer_parent->bonus_points + 100 ;    /// FOR BIKE//
-
+                            //**FOR GOLD (4500-9999) */   =>   FOR BIKE
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Gold']);
+                            }elseif($right_reffer->total_points >= 10000 && $right_reffer->total_points < 20000){
+                                //**FOR Platinum (10000-19999) */  =>   FOR Mobile
+                                    User::where('id',$depositer_parent->id)->update(['rank' => 'Platinum']);
+                            }elseif($right_reffer->total_points >= 20000 && $right_reffer->total_points < 40000){
+                                //**FOR Platinum (20000-39999) */  =>   FOR Team Manager
+                                    $rank_bonus = $depositer_parent->bonus_points + 1200;
+                                     User::where('id',$depositer_parent->id)->update(['rank' => 'Team Manager','bonus_points','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 70000){
+                                //**FOR Platinum (70000) */  =>   Senior Manager
+                                $rank_bonus = $depositer_parent->bonus_points + 2500;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Senior Manager','bonus_points','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 120000){
+                                //**FOR Director (120000) */  =>   Director
+                               // $rank_bonus = $depositer_parent->bonus_points + 2500;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Director']);
+                            }elseif($right_reffer->total_points == 200000){
+                                //**FOR Marketing Director (200000) */  =>   Director
+                                $rank_bonus = $depositer_parent->bonus_points + 7000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Marketing Director','bonus_points','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 400000){
+                                //**FOR Emerald (400000) */  =>   Emerald
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Emerald']);
+                            }elseif($right_reffer->total_points == 800000){
+                                //**FOR Emerald (800000) */  =>   Dimaond
+                                $rank_bonus = $depositer_parent->bonus_points + 25000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Dimaond','bonus_points','bonus_points' => $rank_bonus]);
                             }
                         }
                         //***RANT CALCULTION END HERE */
@@ -159,8 +183,9 @@ class DepositController extends Controller
             // }
 
         }
-      return 'true';
     }
+    return 'true';
+}
      //LOAD EDIT VIEW//
      public function edit($id)
      {
