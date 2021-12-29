@@ -133,41 +133,61 @@ class DepositController extends Controller
                           //***RANK CALCULTION START HERE */
                           if($reffer->total_points == $right_reffer->total_points){
                             //**FOR BRONZ RANK (2000-4449) */
-                            if($right_reffer->total_points >= 2000 && $right_reffer->total_points < 4500){
+                            if($right_reffer->total_points >= 2000 && $right_reffer->total_points < 4500 && $right_reffer->rank !='Bronze'){
 
                                 $rank_bonus = $depositer_parent->bonus_points + 100 ;
 
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Bronze','bonus_points','bonus_points' => $rank_bonus]);
 
-                            }elseif($right_reffer->total_points >= 4500 && $right_reffer->total_points < 10000){
+                            }elseif($right_reffer->total_points >= 4500 && $right_reffer->total_points < 10000 && $right_reffer->rank !='Gold'){
                             //**FOR GOLD (4500-9999) */   =>   FOR BIKE
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Gold']);
-                            }elseif($right_reffer->total_points >= 10000 && $right_reffer->total_points < 20000){
+                            }elseif($right_reffer->total_points >= 10000 && $right_reffer->total_points < 20000 && $right_reffer->rank !='Platinum'){
                                 //**FOR Platinum (10000-19999) */  =>   FOR Mobile
                                     User::where('id',$depositer_parent->id)->update(['rank' => 'Platinum']);
-                            }elseif($right_reffer->total_points >= 20000 && $right_reffer->total_points < 40000){
+                            }elseif($right_reffer->total_points >= 20000 && $right_reffer->total_points < 40000 && $right_reffer->rank !='Team Manager'){
                                 //**FOR Platinum (20000-39999) */  =>   FOR Team Manager
                                     $rank_bonus = $depositer_parent->bonus_points + 1200;
                                      User::where('id',$depositer_parent->id)->update(['rank' => 'Team Manager','bonus_points','bonus_points' => $rank_bonus]);
-                            }elseif($right_reffer->total_points == 70000){
+                            }elseif($right_reffer->total_points == 70000 && $right_reffer->rank !='Senior Manager'){
                                 //**FOR Platinum (70000) */  =>   Senior Manager
                                 $rank_bonus = $depositer_parent->bonus_points + 2500;
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Senior Manager','bonus_points','bonus_points' => $rank_bonus]);
-                            }elseif($right_reffer->total_points == 120000){
+                            }elseif($right_reffer->total_points == 120000 && $right_reffer->rank !='Director'){
                                 //**FOR Director (120000) */  =>   Director
                                // $rank_bonus = $depositer_parent->bonus_points + 2500;
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Director']);
-                            }elseif($right_reffer->total_points == 200000){
+                            }elseif($right_reffer->total_points == 200000 && $right_reffer->rank !='Marketing Director'){
                                 //**FOR Marketing Director (200000) */  =>   Director
                                 $rank_bonus = $depositer_parent->bonus_points + 7000;
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Marketing Director','bonus_points','bonus_points' => $rank_bonus]);
-                            }elseif($right_reffer->total_points == 400000){
+                            }elseif($right_reffer->total_points == 400000 && $right_reffer->rank !='Emerald'){
                                 //**FOR Emerald (400000) */  =>   Emerald
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Emerald']);
-                            }elseif($right_reffer->total_points == 800000){
-                                //**FOR Emerald (800000) */  =>   Dimaond
+                            }elseif($right_reffer->total_points == 800000 && $right_reffer->rank !='Dimaond'){
+                                //**FOR Emerald (800000) */  =>   Emerald
                                 $rank_bonus = $depositer_parent->bonus_points + 25000;
-                                User::where('id',$depositer_parent->id)->update(['rank' => 'Dimaond','bonus_points','bonus_points' => $rank_bonus]);
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Dimaond','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 1500000 && $right_reffer->rank !='Blue Dimaond'){
+                                //**FOR Blue Dimaond (1500000) */  =>   Blue Dimaond
+                                $rank_bonus = $depositer_parent->bonus_points + 35000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Blue Dimaond','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 2500000 && $right_reffer->rank !='Royal Dimaond'){
+                                //**FOR Royal Dimaond (2500000) */  =>   Royal Dimaond
+                                $rank_bonus = $depositer_parent->bonus_points + 15000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Royal Dimaond','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 5000000 && $right_reffer->rank !='Crown Dimaond'){
+                                //**FOR Crown Dimaond (2500000) */  =>   Crown Dimaond
+                                $rank_bonus = $depositer_parent->bonus_points + 100000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Crown Dimaond','bonus_points' => $rank_bonus]);
+                            }elseif($right_reffer->total_points == 10000000 && $right_reffer->rank !='Presidental Dimaond'){
+                                //**FOR Presidental Dimaond (2500000) */  =>   Presidental Dimaond
+                                // $rank_bonus = $depositer_parent->bonus_points + 10000000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Presidental Dimaond']);
+                            }elseif($right_reffer->total_points == 15000000 && $right_reffer->rank !='Int Presidental Dimaond'){
+                                //**FOR Presidental Dimaond (2500000) */  =>  Int Presidental Dimaond
+                                $rank_bonus = $depositer_parent->bonus_points + 10000000;
+                                User::where('id',$depositer_parent->id)->update(['rank' => 'Int Presidental Dimaond','bonus_points' => $rank_bonus]);
                             }
                         }
                         //***RANT CALCULTION END HERE */
