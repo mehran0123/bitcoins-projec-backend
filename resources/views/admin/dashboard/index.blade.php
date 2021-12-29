@@ -25,6 +25,7 @@
                 <!-- metric column -->
                 <!-- /metric column -->
                 <!-- metric column -->
+
                 <div class="col">
                   <!-- .metric -->
                   <a href="#" class="metric metric-bordered align-items-center">
@@ -37,6 +38,7 @@
                     </p>
                   </a> <!-- /.metric -->
                 </div> &nbsp &nbsp; &nbsp; <!-- /metric column -->
+                @endif
                 <!-- metric column -->
                 <div class="col">
                     <!-- .metric -->
@@ -55,7 +57,7 @@
                   <a href="#" class="metric metric-bordered align-items-center">
                     <h2 class="metric-label">Total Deposit</h2>
                     <p class="metric-value h3">
-                      <sub><i class="oi oi-audio"></i></sub> <span class="value">0</span>
+                      <sub><i class="oi oi-audio"></i></sub> <span class="value">{{$deposits}}</span>
                     </p>
                   </a> <!-- /.metric -->
                 </div>
