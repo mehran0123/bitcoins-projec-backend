@@ -35,7 +35,7 @@
               .then((willDelete) => {
               if (willDelete) {
                   $.ajax({
-                  url:"{{ route('category.delete') }}",
+                  url:"#",
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){
@@ -60,7 +60,7 @@
               const id = $(this).parent().find('input[name="id"]').val();
                 const optoin = $(this);
               $.ajax({
-                  url:"{{ route('category.change-status') }}",
+                  url:"#",
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){

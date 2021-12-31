@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\Users\UserController;
+use App\Http\Controllers\PercentageController;
 use App\Mail\ResetPasswordMail;
 use Illuminate\Support\Facades\Route;
 /*
@@ -82,6 +83,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update', [UserController::class,'update'])->name('users.update');
         Route::post('/delete', [UserController::class,'delete'])->name('users.delete');
         Route::post('/change-status', [UserController::class,'change_status'])->name('users.change-status');
+    });
+
+    Route::group(['prefix' => 'percentage'], function () {
+        Route::get('/',[PercentageController::class,'index'])->name('percentage.list');
+        Route::get('/percentage-create', [PercentageController::class,'createView'])->name('percentage.create');
+        Route::post('/create-process', [PercentageController::class,'create_process'])->name('percentage.create-process');
+        Route::get('/edit/{id}', [PercentageController::class,'edit'])->name('percentage.edit');
+        Route::post('/update', [PercentageController::class,'update'])->name('percentage.update');
+        Route::post('/delete', [PercentageController::class,'delete'])->name('percentage.delete');
+        Route::post('/change-status', [PercentageController::class,'change_status'])->name('percentage.change-status');
     });
 
      //ROUTES FOR DEPOSITS//

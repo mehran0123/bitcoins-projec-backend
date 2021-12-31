@@ -3,31 +3,21 @@
 <script>
     $(document).ready(function(){
 
-        //preventing from copt paste
-        $('#name_english').on("cut copy paste",function(e) {
-                e.preventDefault();
-            });
 
-            $('#short_name_english').on("cut copy paste",function(e) {
-                e.preventDefault();
-            });
         //for add new News Post
-        $('#category_form').click(function(){
-            const category_name = $('#category_name').val();
+        $('#add_percentage').click(function(){
+            const percentage = $('#percentage').val();
             //applying validations here
-            if(!category_name != "" || !$.trim(category_name).length){
-                 $('#category_name_error').html("Category Name Required*");
+            if(!percentage != "" || !$.trim(percentage).length){
+                 $('#percentage_error').html("percentage required*");
                  return $('#name_english').focus();
-            }else if(category_name.length < 2){
-                    $('#category_name_error').html("Category Name Should be greater than 2 Characters.");
-                return  $('#category_name').focus();
             }else{
-                 $('#category_name_error').html("");
+                 $('#percentage_error').html("");
                 var formData = new FormData();
-                formData.append('category_name',category_name);
+                formData.append('percentage',percentage);
                 formData.append('_token',"{{ csrf_token() }}");
                  $.ajax({
-                     url:"{{ route('category.create') }}",
+                     url:"{{ route('percentage.create-process') }}",
                      method:"POST",
                      data:formData,
                      contentType:false,
@@ -36,12 +26,12 @@
                      success:function(res){
                        console.log(res);
                        if(res == "success"){
-                        swal('success',"Category Created Successfully!",'success');
-                        $('#category_name').val('');
+                        swal('success',"Percentage Created Successfully!",'success');
+                        $('#percentage').val('');
                         // window.location.reload();
                        }else{
-                        $('#category_name_error').html("Category Name Already Exists.");
-                        $('#category_name').focus();
+                        $('#percentage_error').html("Percentage Already Exists.");
+                        $('#percentage').focus();
                        }
                      },error:function(xhr){
                          console.log(xhr.responseText);
@@ -71,7 +61,7 @@
         });
 
         //appling validations on input fields
-        // $('input[name="category_name"]').on('keypress', function(e) {
+        // $('input[name="percentage"]').on('keypress', function(e) {
         //   var regex = new RegExp("^[a-zA-Z ]*$");
         //   var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
         //   if (regex.test(str)) {

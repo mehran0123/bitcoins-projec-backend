@@ -175,6 +175,9 @@
                  <li class="menu-item @yield('users')">
                   <a href="{{ route('users.list') }}" class="menu-link"><span class="oi oi-cloud-upload"></span> <span class="menu-text">Users</span></a>
                 </li>
+                <li class="menu-item @yield('percentage')">
+                    <a href="{{ route('percentage.list') }}" class="menu-link"><span class="oi oi-cloud-upload"></span> <span class="menu-text">Set Percentage</span></a>
+                  </li>
                 @endif
                 <li class="menu-item @yield('deposist')">
                     <a href="{{ route('deposits.list') }}" class="menu-link"><span class="oi oi-audio-spectrum"></span> <span class="menu-text">Deposit</span></a>

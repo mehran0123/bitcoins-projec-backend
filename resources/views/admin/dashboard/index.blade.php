@@ -38,7 +38,6 @@
                     </p>
                   </a> <!-- /.metric -->
                 </div> &nbsp &nbsp; &nbsp; <!-- /metric column -->
-                @endif
                 <!-- metric column -->
                 <div class="col">
                     <!-- .metric -->
