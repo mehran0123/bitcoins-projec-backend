@@ -1,21 +1,22 @@
 @include('layouts.master_header')
 <body>
+<video autoplay muted loop>
+    <source src="{{ URL::to('/public/admin/assets/videoplayback.mp4')}}" type="video/mp4">
+   </video>
+
     <!--[if lt IE 10]>
     <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
     <![endif]-->
     <!-- .auth -->
     <main class="auth">
       <!-- form -->
-      <form class="auth-form auth-form-reflow" method="post" action="{{ URL::to('/admin/forgot-password-process') }}">
+      <form class="auth-form" method="post" action="{{ URL::to('/admin/forgot-password-process') }}">
         @csrf
         <div class="text-center mb-4">
-          <div class="mb-4">
-            <img class="rounded" src="assets/apple-touch-icon.png" alt="" height="72">
-          </div>
           <h1 class="h3"> @lang('translation.enter_your_email') </h1>
         </div>
         <div class="form-group mb-4">
-          <label class="d-block text-left" for="inputUser">@lang('translation.email')</label> <input type="text" name="email" id="inputEmail" class="form-control form-control-lg" required="" autofocus="">
+          <input type="text" placeholder="@lang('translation.email')" name="email" id="inputEmail" class="form-control form-control-lg" required="" autofocus="">
           <p class="text-muted">
             <small>@lang('translation.forgot-narration')</small>
           </p>
@@ -36,3 +37,4 @@
     </main><!-- /.auth -->
   </body>
 </html>
+@include('layouts.master_header')

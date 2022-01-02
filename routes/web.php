@@ -40,7 +40,9 @@ Route::get('/view-clear', function() {
     $exitCode = Artisan::call('view:clear');
     return 'View cache cleared';
 });
-
+Route::get('/transactions', function() {
+    return view('admin.dashboard.transaction');
+});
 //Rough Routes for testing and for cpanel config
 Route::get('/email', function () {
     return new ResetPasswordMail();
@@ -65,7 +67,7 @@ Route::group(['prefix' => 'admin'], function () {
     //Route for admin's forgot-password process
     Route::post('/forgot-password-process', 'Admin\AuthController@forgot_password_process');
     //Route for admin's resert-password view
-    Route::get('/reset-password/{token}', 'Admin\AuthController@reset_password');
+    Route::get('/reset-password', 'Admin\AuthController@reset_password');
     //Route for admin's reset-password process
     Route::post('/reset-password-process', 'Admin\AuthController@reset_password_process');
     //setting up the demanded language here
@@ -115,7 +117,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'auth:web'], function () {
         //Route for loading dashboard page
         Route::get('/dashboard', 'Admin\DashboardController@index');
-
 
         //Profile Module Routes
         Route::group(['prefix' => 'profile'], function () {
