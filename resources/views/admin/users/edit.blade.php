@@ -16,7 +16,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item ">
-            <a href="{{ URL::to('/admin/dashboard') }}"></i>@lang('translation.dashboard')</a>
+            <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
         </li>
         <li class="breadcrumb-item">
             <a href="#">Manage Users</a>
@@ -52,11 +52,13 @@
         </div>
     </div>
         <div class="row">
-            <div class="col-md-4">
+
+            <div class="col-md-4   @if(Auth::user()->user_role ==2) d-none  @endif">
                 <label for="email">Eamil</label>
                 <input type="email" placeholder="Enter your email" value="{{ $user->email }}" class="form-control" id="email">
                 <small id="email_error" class="text-danger"></small>
             </div>
+
             <div class="col-md-4">
                 <label for="phone">Phone No.</label>
                 <input type="number" value="{{ $user->phone }}" placeholder="Enter User phone number" class="form-control" id="phone">

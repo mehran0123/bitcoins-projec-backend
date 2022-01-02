@@ -17,7 +17,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ URL::to('/admin/dashboard') }}"></i>@lang('translation.dashboard')</a>
+                <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
               </li>
                 <li class="breadcrumb-item active">
                   <a href="">Withdraw List</a>
@@ -69,7 +69,7 @@
           @endif
       </td>
       <td class="align-middle text-center">
-          <a href="{{ URL::to('admin/deposits/edit') }}/{{ $deposit->id  }}" id="update_catgory-missing" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="View deposit">
+          <a href="{{ URL::to('trade-center/deposits/edit') }}/{{ $deposit->id  }}" id="update_catgory-missing" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="View deposit">
               <i class="fa fa-eye text-primary" style="padding-top: 7px !important"></i>
           </a>
           <a href="#">

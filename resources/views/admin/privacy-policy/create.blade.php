@@ -15,7 +15,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active">
-            <a href="{{ URL::to('/admin/dashboard') }}"></i>@lang('translation.dashboard')</a>
+            <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
           </li>
             <li class="breadcrumb-item active">
               <a href="{{ route('categories.list') }}">@lang('translation.categories')</a>

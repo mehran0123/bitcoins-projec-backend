@@ -2,52 +2,20 @@
 
 <script>
     $(document).ready(function(){
-
-        //preventing from copt paste
-        $('#name_english').on("cut copy paste",function(e) {
-                e.preventDefault();
-            });
-
-            $('#short_name_english').on("cut copy paste",function(e) {
-                e.preventDefault();
-            });
         //for add new News Post
-        $('#edit_audio').click(function(){
-            const audio_name = $('#audio_name').val();
-            const artist = $('#artist').val();
-            const details = $('#details').val();
-            const category_id = $('#category_id').val();
+        $('#add_slider').click(function(){
             var image = $('input[name="file-one"]').val();
-            var audio = $('input[name="audio"]').val();
-
-            //applying validations here
-            if(category_id == ""){
-                 $('#category_name_error').html("category name required*");
-                 return $('#category_id').focus();
-            }else if(!audio_name != "" || !$.trim(audio_name).length){
-                 $('#audio_name_error').html("Audio Name Required*");
-                 return $('#audio_name').focus();
-            }else if(!artist != "" || !$.trim(artist).length){
-                 $('#artist_error').html("offered by Name Required*");
-                 return $('#artist').focus();
-            }else if(!details != "" || !$.trim(details).length){
-                    $('#details_error').html("details required*.");
-                return  $('#details').focus();
+           if(!image){
+                $('#image_one_error').html("");
+                return $('#image_one_error').html("Image required.*");
             }else{
-                 $('#category_name_error').html("");
+                 $('#image_one_error').html("");
                 var formData = new FormData();
                 image = document.getElementById('fileupload-btn-one').files[0];
-                audio = document.getElementById('audio').files[0];
-                formData.append('audio_name',audio_name);
-                formData.append('artist',artist);
-                formData.append('details',details);
-                formData.append('category_id',category_id);
                 formData.append('image',image);
-                formData.append('audio',audio);
-                formData.append('id',"{{ $audio->id }}");
                 formData.append('_token',"{{ csrf_token() }}");
                  $.ajax({
-                     url:"{{ route('audios.update') }}",
+                     url:"{{ route('sliders.create-process') }}",
                      method:"POST",
                      data:formData,
                      contentType:false,
@@ -56,12 +24,8 @@
                      success:function(res){
                        console.log(res);
                        if(res == "success"){
-                        swal('success',"Audio Updated Successfully!",'success');
-                        $('#audio_name').val('');
+                        swal('success',"Slider Image Created Successfully!",'success');
                         window.location.reload();
-                       }else{
-                        $('#audio_name_error').html("Audio Name Already Exists.");
-                        $('#audio_name').focus();
                        }
                      },error:function(xhr){
                          console.log(xhr.responseText);

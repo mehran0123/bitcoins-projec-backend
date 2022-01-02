@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Mail\ResetPasswordMail;
 use App\Http\Controllers\Admin\Mail;
 use App\Models\User;
-use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session ;
 
 class AuthController extends Controller
 {
@@ -18,7 +18,7 @@ class AuthController extends Controller
         if (!isset(Auth::user()->id)) {
             return view('admin.auth.login');
         } else {
-            return redirect('/admin/dashboard');
+            return redirect('/trade-center/dashboard');
         }
     }
 
@@ -33,7 +33,7 @@ class AuthController extends Controller
 
             //checking for admin login
             if ($user->user_role == 1) {
-                return redirect('/admin/dashboard');
+                return redirect('/trade-center/dashboard');
             } else {
                 //redirecting to login page if user try to login
                 Session::flash('error', trans('translation.invalid_email_or_password'));
@@ -113,6 +113,6 @@ class AuthController extends Controller
     {
         //destroying the Auth session here
         Session::flush();
-        return redirect('/admin');
+        return redirect('/trade-center');
     }
 }

@@ -109,7 +109,7 @@ a {
       <!--  <p> Bitcoins-->
       <!--  </p>-->
       <!--</header><!-- form -->
-      <form action="{{ URL::to('/admin/login-pro') }}" method="POST" class="auth-form">
+      <form action="{{ URL::to('/trade-center/login-pro') }}" method="POST" class="auth-form">
         <!-- .form-group -->
         @csrf
         <x-messages/>
@@ -142,7 +142,7 @@ a {
         </div><!-- /.form-group -->
          <!--recovery links -->
         <div class="text-center pt-3">
-         <span class="mx-2">·</span> <a href="{{ URL::to('/admin/forgot-password') }}" class="link">@lang('translation.forgot_password')</a>
+         <span class="mx-2">·</span> <a href="{{ URL::to('/trade-center/forgot-password') }}" class="link">@lang('translation.forgot_password')</a>
          </div><!-- /recovery links -->
       </form><!-- /.auth-form -->
 @include('layouts.master_footer')

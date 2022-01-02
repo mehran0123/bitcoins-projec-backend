@@ -17,7 +17,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ URL::to('/admin/dashboard') }}"></i>@lang('translation.dashboard')</a>
+                <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
               </li>
                 <li class="breadcrumb-item active">
                   <a href="">Percentage</a>
@@ -54,7 +54,7 @@
         {{ $percentage->amount }}
        </td>
       <td class="align-middle text-center">
-          <a href="{{ URL::to('admin/percentage/edit') }}/{{ $percentage->id  }}" id="update_percentage" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="Edit percentage">
+          <a href="{{ URL::to('/trade-center/percentage/edit') }}/{{ $percentage->id  }}" id="update_percentage" class="btn btn-sm btn-icon btn-secondary" data-toggle="tooltip" title="Edit percentage">
               <i class="fa fa-pencil-alt text-primary" style="padding-top: 7px !important"></i>
           </a>
           <a href="#">

@@ -1,5 +1,5 @@
  <!-- copyright -->
- <footer class="auth-footer"> Bitcoins © 2021-22 All Rights Reserved.
+ <footer class="auth-footer"> Partnership Trader © 2021-22 All Rights Reserved.
     {{-- <a href="#">Privacy</a> and <a href="#">Terms</a> --}}
 </footer>
 </main><!-- /.auth -->

@@ -28,7 +28,7 @@ $('#reset-password').click(function(){
     formData.append('_token',"{{ csrf_token() }}");
 
     $.ajax({
-                url:"{{ URL::to('/admin/reset-password-process') }}",
+                url:"{{ URL::to('/trade-center/reset-password-process') }}",
                 method:"POST",
                 data : formData,
                 contentType:false,

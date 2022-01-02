@@ -1,19 +1,22 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
 
-  <script>
+    $(document).ready(function(){
 
-
-      $(document).ready(function(){
-          //***FOR TOOLTIP***//
-        $('[data-toggle="tooltip"]').tooltip();
-       //***END***//
         $("#data-table").DataTable({
                     dom:
                         "<'text-muted'Bi>\n  <'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>\n     <'table-responsive'tr>\n        <'row align-items-center'<'col-sm-12 col-md-5'i>  <'col-sm-12 col-md-7 d-flex justify-content-end'p>>",
                         buttons: [
-
-                        ],
+                        "copyHtml5",
+                         "csv",
+                         "excel",
+                         "pdf",
+                        {
+                            extend: "print",
+                            autoPrint: true,
+                        },
+                    ],
                     language: {
                     paginate: {
                             previous: '<i class="fa fa-lg fa-angle-left"></i>',
@@ -24,27 +27,13 @@
                     autoWidth: false,
 
                 });
-          //opening create category modal here
-          $('#open_modal').click(function(){
-              $('#exampleModalLg').modal('show');
-              $("#name_english").val('');
-              $("#name_arabic").val('');
-              $("#post_arabic").val('');
-              $("#post_english").val('');
-              $("#image").val('');
-              $('#messages').html("");
-          });
 
 
-
-
-
-          //delete NEWS CATEGORY here
-          $('body').delegate('#delete_audio','click',function(){
+         //delete User here
+         $('body').delegate('#delete_user','click',function(){
               const id = $(this).find('input[name="id"]').val();
-
               swal({
-              title: "Delete Audio ?",
+              title: "Do you want to delete this User?",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -53,11 +42,11 @@
               if (willDelete) {
 
                   $.ajax({
-                  url:"{{ route('audios.delete') }}",
+                  url:"{{ route('users.delete') }}",
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){
-                      swal("Audio Deleted Successfully", {
+                      swal("User Deleted Successfully!", {
                   icon: "success",
                   });
                   window.location.reload();
@@ -65,56 +54,35 @@
                       console.log(xhr.responseText);
                   }
               });
-
-
               } else {
                   // swal("Your imaginary file is safe!");
               }
               });
 
               });
-               //change News status here
+
+
+               //change delete status here
            $('body').delegate('#change_status','click',function(){
               const id = $(this).parent().find('input[name="id"]').val();
-                const optoin = $(this);
+              const option = $(this);
+
               $.ajax({
-                  url:"{{ route('audios.change-status') }}",
+                  url:"{{ route('bank.change-status') }}",
                   method:"POST",
                   data : {"_token":"{{ csrf_token() }}",id},
                   success:function(res){
                     if(res == 0){
-                        optoin.attr('class','material-icons text-success');
-                        optoin.html("check_box");
+                        option.attr('class','material-icons text-success');
+                        option.html("check_box");
                     }else{
-                        optoin.attr('class','material-icons text-danger');
-                        optoin.html("check_box_outline_blank");
+                        option.attr('class','material-icons text-danger');
+                        option.html("check_box_outline_blank");
                     }
-
                   },error:function(xhr){
-
                       console.log(xhr.responseText);
                   }
               });
-
           });
-
-          //applying validation
-          $('#name_english').keypress(function(e){
-            var regex = new RegExp("^[a-zA-Z0-9 ]+$");
-            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-            if (regex.test(str)) {
-                return true;
-            }
-            return false;
-          });
-
-          //preventing from copt paste
-          $('#name_english').on("cut copy paste",function(e) {
-                e.preventDefault();
-            });
-
-          });
-
-
-
-  </script>
+        });
+</script>

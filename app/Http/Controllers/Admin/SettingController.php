@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class SettingController extends Controller

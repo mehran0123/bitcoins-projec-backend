@@ -238,7 +238,7 @@
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> Account Setting</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="{{ URL::to('/admin/logout') }}"><i class="ion-log-out"></i> Logout</a>
+									<a class="dropdown-item" href="{{ URL::to('/trade-center/logout') }}"><i class="ion-log-out"></i> Logout</a>
 								</li>
 							</ul>
 						</li>

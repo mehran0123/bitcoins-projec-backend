@@ -1,7 +1,7 @@
 @extends('layouts.master')
-@section('title','Administration list')
-@section('administrations-has-open','has-open has-active')
-@section('administration','has-active')
+@section('title','Bank list')
+{{-- @section('banks-has-open','has-open has-active') --}}
+@section('bank','has-active')
 <style>
     i{
         cursor: pointer;
@@ -25,17 +25,14 @@
             <li class="breadcrumb-item">
                 <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
               </li>
-              <li class="breadcrumb-item">
-                <a href="#">Manage Administration</a>
-              </li>
               <li class="breadcrumb-item active">
-                <a href="{{ route('administration.list') }}">Administration</a>
+                <a href="{{ route('bank.list') }}">banks Setting</a>
               </li>
           </ol>
         </nav><!-- /.breadcrumb -->
         <!-- title -->
-        <h1 class="page-title">Administration List
-            <a href="{{ route('administration.create') }}" class="btn btn-sm btn-success float-right">Create</a>
+        <h1 class="page-title">Bank List
+            <a href="{{ route('bank.createView') }}" class="btn btn-sm btn-success float-right">Create</a>
         </h1>
 
       </header><!-- /.page-title-bar -->
@@ -50,50 +47,72 @@
       <thead>
         <tr>
             <th class="text-left"> ID </th>
-            <th > Name </th>
-            <th > Email </th>
-            {{-- <th > Password </th> --}}
-            <th > Role </th>
+            <th> Title </th>
+            <th> Type </th>
+            <th> Account No. </th>
+            <th> Transection Fee</th>
             <th class="text-center"> Status </th>
             <th class="text-center"> Action </th>
         </tr>
       </thead>
       <tbody>
-        @if (count($administrations) > 0)
-        @foreach ($administrations as $key => $user)
+        @if (count($banks) > 0)
+        @foreach ($banks as $key => $bank)
         <tr>
             <td>{{ ++$key }}</td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
-            {{-- <td>{{ $user->c_password }}</td> --}}
+            <td>{{ $bank->title}}</td>
             <td>
-                @if($user->user_role == 3)
-                {{ 'Admin' }}
-                @elseif($user->user_role == 4)
-                {{ 'Standard User' }}
-                @elseif($user->user_role == 5)
-                {{ 'Basic User' }}
-                @elseif($user->user_role == 6)
-                {{ 'Accountant' }}
+                @if ($bank->type == 1)
+                {{ 'Local bank' }}
+                @elseif ($bank->type == 2)
+                {{ 'Binance' }}
+                @elseif ($bank->type == 3)
+                {{ 'Coin Base' }}
+                @elseif ($bank->type == 4)
+                {{ 'Perfect Money' }}
+                @elseif ($bank->type == 5)
+                {{ 'Skril' }}
+                @elseif ($bank->type == 6)
+                {{ 'Paypal' }}
+                @elseif ($bank->type == 7)
+                {{ 'Wechat' }}
+                @elseif ($bank->type == 8)
+                {{ 'Amazon Pay' }}
+                @elseif ($bank->type == 9)
+                {{ 'Google Pay' }}
+                @elseif ($bank->type == 10)
+                {{ 'Apple Pay' }}
+                @elseif ($bank->type == 11)
+                {{ 'American Express' }}
+                @elseif ($bank->type == 12)
+                {{ 'Stripe' }}
+                @elseif ($bank->type == 13)
+                {{ 'Square' }}
+                @else
+                {{ 'Visa Checkout' }}
                 @endif
             </td>
+            <td>{{ $bank->account_no }}</td>
+            <td>{{ $bank->transection_fee !='' ?  $bank->transection_fee : 0 }}</td>
             <td class="text-center">
-                <input type="hidden" name="id" value="{{ $user->id }}">
-                @if ($user->is_active == 1)
+                <input type="hidden" name="id" value="{{ $bank->id }}">
+                @if ($bank->is_active == 1)
                 <i class="material-icons text-success"  id="change_status">check_box</i>
                 @else
                 <i class="material-icons text-danger" id="change_status">check_box_outline_blank</i>
                 @endif
             </td>
             <td class="align-middle text-center">
-                <a href="{{ route('administration.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-icon btn-secondary">
+                <a href="{{ route('bank.edit', ['id' => $bank->id]) }}" class="btn btn-sm btn-icon btn-secondary">
                     <i class="fa fa-pencil-alt text-primary" style="padding-top: 7px !important"></i>
                 </a>
                 <a href="#">
-                    <span class="sr-only">Edit</span></a> <a href="#" id="delete_administration" class="btn btn-sm btn-icon btn-secondary">
+                    <span class="sr-only">Edit</span>
+                </a>
+                 {{-- <a href="#" id="delete_bank" class="btn btn-sm btn-icon btn-secondary">
                         <i class="far fa-trash-alt" style="padding-top: 7px !important;color:red"></i> <span class="sr-only">Remove</span>
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                    </a>
+                        <input type="hidden" name="id" value="{{ $bank->id }}">
+                    </a> --}}
               </td>
         </tr>
         @endforeach
@@ -102,9 +121,13 @@
       <tfoot>
         <tr>
             <th class="text-left"> ID </th>
-            <th > Name </th>
+            <th> Title </th>
+            <th> Type </th>
+            <th> Account No. </th>
+            <th> Transection Fee</th>
             <th class="text-center"> Status </th>
             <th class="text-center"> Action </th>
+        </tr>
       </tfoot>
     </table><!-- /.table -->
   </div><!-- /.card-body -->
@@ -115,7 +138,7 @@
     </div><!-- /.page-inner -->
   </div><!-- /.page -->
 </div>
-@include('admin.countries.js.index')
+@include('admin.banks.js.index')
 @endsection
 
 

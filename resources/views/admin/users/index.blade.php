@@ -23,7 +23,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ URL::to('/admin/dashboard') }}"></i>@lang('translation.dashboard')</a>
+                <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
               </li>
               <li class="breadcrumb-item">
                 <a href="#">Manage Users</a>

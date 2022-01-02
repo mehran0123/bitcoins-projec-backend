@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DepositController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\PercentageController;
 use App\Mail\ResetPasswordMail;
+use App\Models\Admin\Transection;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -49,17 +52,17 @@ Route::get('/email', function () {
 });
 
 Route::get('/', function () {
-    return 'website';
+    return redirect('/trade-center');
 });
 
 //Group Routes With Admin Language Middleware for hadnling localisation
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'trade-center'], function () {
 
     //////////////Admin Side Routes////////////////////
 
     //Route for loading admin login page
-    Route::get('/', 'Admin\AuthController@index')->name('admin');
+    Route::get('/', 'Admin\AuthController@index')->name('trade-center');
     //Route for admin's login process
     Route::post('/login-pro', 'Admin\AuthController@login_process');
     //Route for admin's forgot-password view
@@ -85,6 +88,26 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update', [UserController::class,'update'])->name('users.update');
         Route::post('/delete', [UserController::class,'delete'])->name('users.delete');
         Route::post('/change-status', [UserController::class,'change_status'])->name('users.change-status');
+    });
+    //routes for Bank//
+    Route::group(['prefix' => 'bank'], function () {
+        Route::get('/',[BankController::class,'index'])->name('bank.list');
+        Route::get('create', [BankController::class,'create'])->name('bank.createView');
+        Route::post('/create', [BankController::class,'create_process'])->name('bank.create-process');
+        Route::get('/edit/{id}', [BankController::class,'edit'])->name('bank.edit');
+        Route::post('/update', [BankController::class,'update'])->name('bank.update');
+        Route::post('/delete', [BankController::class,'delete'])->name('bank.delete');
+        Route::post('/change-status', [BankController::class,'change_status'])->name('bank.change-status');
+    });
+    //routes for Sliders //
+    Route::group(['prefix' => 'sliders'], function () {
+        Route::get('/',[SliderController::class,'index'])->name('sliders.list');
+        Route::get('create', [SliderController::class,'create'])->name('sliders.createView');
+        Route::post('/create', [SliderController::class,'create_process'])->name('sliders.create-process');
+        Route::get('/edit/{id}', [SliderController::class,'edit'])->name('sliders.edit');
+        Route::post('/update', [SliderController::class,'update'])->name('sliders.update');
+        Route::post('/delete', [SliderController::class,'delete'])->name('sliders.delete');
+        Route::post('/change-status', [SliderController::class,'change_status'])->name('sliders.change-status');
     });
 
     Route::group(['prefix' => 'percentage'], function () {
@@ -136,7 +159,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //Route for admin's logout
-        Route::get('/logout', 'Admin\AuthController@logout');
+        Route::get('/logout', 'Admin\AuthController@logout')->name('logout');
     });
 });
 
