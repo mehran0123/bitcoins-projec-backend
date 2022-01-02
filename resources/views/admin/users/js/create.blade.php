@@ -86,10 +86,12 @@
                 $('#email_error').html("");
                 $('#cnic_number_error').html("");
                 $('#confirm_password_error').html("");
+                var image = document.getElementById('fileupload-btn-one').files[0];
                 var formData = new FormData();
                 formData.append('first_name',first_name);
                 formData.append('last_name',last_name);
                 formData.append('cnic_number',cnic_number);
+                formData.append('image',image);
                 formData.append('email',email);
                 formData.append('phone',phone);
                 formData.append('password',password);
@@ -132,6 +134,21 @@
         $('#password').val(randomstring);
         $('#confirm_password').val(randomstring);
      });
+
+     //for image preview
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            $('#blah-one').attr('src', e.target.result);
+            $('#blah-one').attr('class','d-block')
+            }
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+        }
+        $("#fileupload-btn-one").change(function() {
+          readURL(this);
+        });
 
  });
 

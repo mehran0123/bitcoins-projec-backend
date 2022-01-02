@@ -90,6 +90,22 @@
                 <input type="checkbox" onclick="passwordShowHide()">Show Password
             </div>
         </div>
+        <div class="col-md-12 col-lg-12 mb-4">
+            <label class="mr-2">Profile Image</label>
+            <div class="group-contain" style="display: flex;">
+               <div class="btn btn-secondary fileinput-button" style="line-height: 2;height: 50px;">
+                  <i class="fa fa-plus fa-fw"></i> <span>Add File</span>
+                  <input id="fileupload-btn-one" type="file" name="file-one" accept="image/*">
+               </div>
+               <div class="form-group" style="display: block;margin: 0 auto;">
+                  <div id="uploadList" class="list-group list-group-flush list-group-divider" style="margin: auto;">
+                     <img src="#" alt="Preview Image" id="blah-one" class="d-none" height="100px">
+                  </div>
+               </div>
+            </div>
+            <!-- /.form-group -->
+            <small id="image_one_error" class="text-danger"></small>
+    </div>
         <br>
     <button class="btn btn-primary btn-lg btn-block" id="add_user">Create</button>
   </form><!-- /form .needs-validation -->

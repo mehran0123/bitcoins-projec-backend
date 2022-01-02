@@ -38,6 +38,7 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->email  = $request->email;
         $user->phone = $request->phone;
+        $user->image = $request->hasFile('image') ?  $request->file('image')->store('UserProfile') :'';
         $user->password = $request->password;
         $user->real_password = $request->password;
         $user->id_card_number = $request->cnic_number;
@@ -78,6 +79,7 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->email  = $request->email;
         $user->phone = $request->phone;
+        $user->image = $request->hasFile('image') ?  $request->file('image')->store('UserProfile') : $user->image;
         $user->password = $request->password;
         $user->real_password = $request->password;
         $user->id_card_number = $request->cnic_number;

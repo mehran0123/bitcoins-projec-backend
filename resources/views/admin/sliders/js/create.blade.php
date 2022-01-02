@@ -86,7 +86,7 @@
         }
         }
         $("#fileupload-btn-one").change(function() {
-        readURL(this);
+          readURL(this);
         });
 
     });
