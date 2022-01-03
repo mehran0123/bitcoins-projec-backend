@@ -37,7 +37,18 @@
     <form method="post" onsubmit="return false">
         <!-- .form-row -->
         <div class="form-row">
-          <div class="col-md-12 mb-3">
+            <div class="col-md-6 mb-3">
+                <label for="name">Deposit Method (Bank)</label>
+                <select id="bank_id" class="form-control">
+                    <option value="">select deposit method</option>
+                    @foreach ($banks as $bank)
+                    <option value="{{ $bank->id }}" @if($deposit->bank_id ==$bank->id ) @endif>{{ $bank->title }}</option>
+                    @endforeach
+                </select>
+                {{-- <input type="number" class="form-control" id="deposit_amount" name="deposit_amount" autofocus> --}}
+                <small id="bank_id_error" class="text-danger"></small>
+            </div>
+          <div class="col-md-6 mb-3">
               <label for="name">Deposit Amount</label>
               <input type="number" class="form-control" value="{{ $deposit->amount }}" id="deposit_amount" name="deposit_amount" autofocus>
               <small id="deposit_amount_error" class="text-danger"></small>

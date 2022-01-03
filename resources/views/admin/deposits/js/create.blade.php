@@ -4,10 +4,14 @@
     $(document).ready(function(){
 
         $('#add_deposit').click(function(){
+            const bank_id = $('#bank_id').val();
             const deposit_amount = $('#deposit_amount').val();
             var slip = $('input[name="file-one"]').val();
             //applying validations here
-            if(!deposit_amount != "" || !$.trim(deposit_amount).length){
+             if(!bank_id != "" || !$.trim(bank_id).length){
+                 $('#bank_id_error').html("Deposit Method Required*");
+                 return $('#bank_id').focus();
+            }else if(!deposit_amount != "" || !$.trim(deposit_amount).length){
                  $('#deposit_amount_error').html("Deposit Amount Required*");
                  return $('#deposit_amount').focus();
             } else if(!slip){
@@ -17,6 +21,7 @@
                    $('#deposit_amount_error').html("");
                slip = document.getElementById('slip-image').files[0];
                 var formData = new FormData();
+                formData.append('bank_id',bank_id);
                 formData.append('deposit_amount',deposit_amount);
                 formData.append('slip',slip);
                 formData.append('_token',"{{ csrf_token() }}");

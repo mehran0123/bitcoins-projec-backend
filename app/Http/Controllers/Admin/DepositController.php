@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Bank;
 use Illuminate\Http\Request;
 use App\Models\Deposit;
 use App\Models\User;
@@ -23,7 +24,9 @@ class DepositController extends Controller
     //LOAD CREATE VIEW//
     public function create()
     {
-        return view('admin.deposits.create');
+        //GETTING BANK DETAILS//
+        $banks = Bank::where('is_active',1)->get();
+        return view('admin.deposits.create',compact('banks'));
     }
     //CREATE PROCESS START HERE//
     public function create_process(Request $request)
@@ -32,8 +35,8 @@ class DepositController extends Controller
         $deposit->amount = $request->deposit_amount;
         $deposit->slip = $request->file('slip')->store('SlipImages');
         $deposit->user_id = Auth::user()->id;
+        $deposit->bank_id = $request->bank_id;
         $deposit->save();
-
         //**UPDATING POINTS HERE*/
          $depositer_points = User::where('id',Auth::user()->id)->first();
          $depositer_parent = User::where('id',Auth::user()->id)->first();
@@ -162,7 +165,7 @@ class DepositController extends Controller
                                 $rank_bonus = $depositer_parent->bonus_points + 7000;
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Marketing Director','bonus_points','bonus_points' => $rank_bonus]);
                             }elseif($right_reffer->total_points == 400000 && $right_reffer->rank !='Emerald'){
-                                //**FOR Emerald (400000) */  =>   Emerald
+                                //**FOR Emerald (400000) */  =>   Emerald//
                                 User::where('id',$depositer_parent->id)->update(['rank' => 'Emerald']);
                             }elseif($right_reffer->total_points == 800000 && $right_reffer->rank !='Dimaond'){
                                 //**FOR Emerald (800000) */  =>   Emerald
@@ -209,8 +212,9 @@ class DepositController extends Controller
      //LOAD EDIT VIEW//
      public function edit($id)
      {
+        $banks = Bank::where('is_active',1)->get();
         $deposit = Deposit::where('id', $id)->first();
-         return view('admin.deposits.edit',compact('deposit'));
+         return view('admin.deposits.edit',compact('deposit','banks'));
      }
      //update Process start here//
      public function update(Request $request)
@@ -218,6 +222,7 @@ class DepositController extends Controller
 
         $deposit = Deposit::where('id', $request->id)->first();
         $deposit->amount = $request->deposit_amount;
+        $deposit->bank_id = $request->bank_id;
         $deposit->slip = $request->hasFile('slip') ? $request->file('slip')->store('SlipImages') : $deposit->slip ;
         $deposit->save();
 
