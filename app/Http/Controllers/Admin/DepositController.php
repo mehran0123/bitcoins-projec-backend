@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Bank;
 use Illuminate\Http\Request;
 use App\Models\Deposit;
+use App\Models\Admin\Transection;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -206,6 +207,15 @@ class DepositController extends Controller
             // }
 
         }
+        //***ADD RECORD IN TRANSECTION***//
+        $bank = Bank::where('id',$request->bank_id)->first();
+        $transection = new Transection;
+        $transection->type = 2;
+        $transection->amount = $request->deposit_amount;
+        $transection->transection_fee = $bank->transection_fee;
+        $transection->method = $bank->type;
+        $transection->save();
+        //***ADD RECORD IN TRANSECTION END HERE***//
     }
     return 'true';
 }
