@@ -232,8 +232,8 @@
 								</li>
 								<!-- Menu Body -->
 								<li class="user-body">
-									<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> My Profile</a>
-									<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-bag"></i> My Balance</a>
+									<a class="dropdown-item" href=""><i class="ion ion-person"></i> My Profile</a>
+									<a class="dropdown-item" href=""><i class="ion ion-bag"></i> My Balance</a>
 									<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-email-unread"></i> Inbox</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> Account Setting</a>
@@ -277,7 +277,7 @@
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header nav-small-cap">Be a Partner</li>
 					<li class="active">
-						<a href="{{ URL::to('admin/dashboard') }}">
+						<a href="{{ URL::to('trade-center/dashboard') }}">
 						<i class="ti-dashboard"></i>
 						<span>Dashboard</span>
 						<span class="pull-right-container">
@@ -294,9 +294,9 @@
 						</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href=""><i class="ti-more"></i>Transactions History</a></li>
-							<li><a href=""><i class="ti-more"></i>Deposit History</a></li>
-							<li><a href=""><i class="ti-more"></i>Withdraw History</a></li>
+							<li><a href="{{ URL::to('trade-center/reports/alltransaction') }}"><i class="ti-more"></i>Transactions History</a></li>
+							<li><a href="{{ URL::to('trade-center/reports/deposits-transactions') }}"><i class="ti-more"></i>Deposit History</a></li>
+							<li><a href="{{ URL::to('trade-center/reports/withdraws-transactions') }}"><i class="ti-more"></i>Withdraw History</a></li>
 						</ul>
 					</li>
 					<li class="treeview">
@@ -332,7 +332,7 @@
 						</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="#"><i class="ti-more"></i>Points Status</a></li>
+							<li><a href="{{ URL::to('trade-center/network-tree') }}"><i class="ti-more"></i>Points Status</a></li>
 							<!--<li><a href="pages/members_list.html"><i class="ti-more"></i>Members List</a></li>-->
 							<!--<li><a href="pages/member_profile.html"><i class="ti-more"></i>Member Profile</a></li>	-->
 						</ul>
@@ -371,7 +371,7 @@
 						</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href="{{ URL::to('/admin/logout') }}"><i class="ti-more"></i>Refer a Friend</a></li>
+							<li><a href="{{ URL::to('/trade-center/referfriends') }}"><i class="ti-more"></i>Refer a Friend</a></li>
 						</ul>
 					</li>
 					<li class="treeview">
@@ -383,7 +383,10 @@
 						</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href=""><i class="ti-more"></i>Logout</a></li>
+                            @if (Auth::user()->user_role==2)
+                            <li><a href="{{ route('users.edit', ['id' => Auth::user()->id]) }}"><i class="ti-more"></i>Edit Profile</a></li>
+                            @endif
+                            <li><a href="{{ URL::to('/trade-center/logout') }}"><i class="ti-more"></i>Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -465,5 +468,80 @@
         'copy', 'csv', 'excel', 'pdf', 'print'
     ]
 } );
+$("document").ready(function(){
+  $(".tab-slider--body").hide();
+  $(".tab-slider--body:first").show();
+});
 
+$(".tab-slider--nav li").click(function() {
+  $(".tab-slider--body").hide();
+  var activeTab = $(this).attr("rel");
+  $("#"+activeTab).fadeIn();
+	if($(this).attr("rel") == "tab2"){
+		$('.tab-slider--tabs').addClass('slide');
+	}else{
+		$('.tab-slider--tabs').removeClass('slide');
+	}
+  $(".tab-slider--nav li").removeClass("active");
+  $(this).addClass("active");
+});
+document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+    var button = document.createElement('button');
+    button.className = 'copy-code-button';
+    button.type = 'button';
+    button.innerText = 'Copy';
+
+    var pre = codeBlock.parentNode;
+    if (pre.parentNode.classList.contains('highlight')) {
+        var highlight = pre.parentNode;
+        highlight.parentNode.insertBefore(button, highlight);
+    } else {
+        pre.parentNode.insertBefore(button, pre);
+    }
+});
+function addCopyButtons(clipboard) {
+    document.querySelectorAll('pre > code').forEach(function (codeBlock) {
+        var button = document.createElement('button');
+        button.className = 'copy-code-button';
+        button.type = 'button';
+        button.innerText = 'Copy';
+
+        button.addEventListener('click', function () {
+            clipboard.writeText(codeBlock.innerText).then(function () {
+                /* Chrome doesn't seem to blur automatically,
+                   leaving the button in a focused state. */
+                button.blur();
+
+                button.innerText = 'Copied!';
+
+                setTimeout(function () {
+                    button.innerText = 'Copy';
+                }, 2000);
+            }, function (error) {
+                button.innerText = 'Error';
+            });
+        });
+
+        var pre = codeBlock.parentNode;
+        if (pre.parentNode.classList.contains('highlight')) {
+            var highlight = pre.parentNode;
+            highlight.parentNode.insertBefore(button, highlight);
+        } else {
+            pre.parentNode.insertBefore(button, pre);
+        }
+    });
+}
+if (navigator && navigator.clipboard) {
+    addCopyButtons(navigator.clipboard);
+} else {
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard-polyfill/2.7.0/clipboard-polyfill.promise.js';
+    script.integrity = 'sha256-waClS2re9NUbXRsryKoof+F9qc1gjjIhc2eT7ZbIv94=';
+    script.crossOrigin = 'anonymous';
+    script.onload = function() {
+        addCopyButtons(clipboard);
+    };
+
+    document.body.appendChild(script);
+}
 </script>

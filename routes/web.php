@@ -43,9 +43,7 @@ Route::get('/view-clear', function() {
     $exitCode = Artisan::call('view:clear');
     return 'View cache cleared';
 });
-Route::get('/transactions', function() {
-    return view('admin.dashboard.transaction');
-});
+
 //Rough Routes for testing and for cpanel config
 Route::get('/email', function () {
     return new ResetPasswordMail();
@@ -60,9 +58,20 @@ Route::get('/', function () {
 Route::group(['prefix' => 'trade-center'], function () {
 
     //////////////Admin Side Routes////////////////////
-
     //Route for loading admin login page
+    Route::get('reports/alltransactions', function() {
+        return view('admin.dashboard.transaction');
+    });
+    Route::get('reports/deposits-transactions', function() {
+        return view('admin.dashboard.deposits-report');
+    });
+    Route::get('reports/withdraws-transactions', function() {
+        return view('admin.dashboard.withdraw-report');
+    });
     Route::get('/', 'Admin\AuthController@index')->name('trade-center');
+    //Route for loading referfriend page
+    Route::get('/referfriends', 'Admin\ReferFriendsController@index');
+    Route::get('/network-tree', 'Admin\MyNetwork@index');
     //Route for admin's login process
     Route::post('/login-pro', 'Admin\AuthController@login_process');
     //Route for admin's forgot-password view

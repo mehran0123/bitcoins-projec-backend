@@ -8,7 +8,6 @@
         font-size: 95% !important;
     }
 </style>
-<div class="page">
     <!-- .page-inner -->
     <div class="page-inner">
 <header class="page-title-bar">
@@ -18,8 +17,16 @@
         <li class="breadcrumb-item ">
             <a href="{{ URL::to('/trade-center/dashboard') }}"></i>@lang('translation.dashboard')</a>
         </li>
+        @if ( Auth::user()->user_role == 2)
+        <li class="breadcrumb-item active">
+            <a href="#">My Profile</a>
+          </li>
+        <li class="breadcrumb-item active">
+          <a href="#">Edit Profile</a>
+        </li>
+        @else
         <li class="breadcrumb-item">
-            <a href="#">Manage Users</a>
+            <a href="#">Manage Users </a>
           </li>
           <li class="breadcrumb-item active">
             <a href="{{ route('users.list') }}">Users</a>
@@ -27,7 +34,8 @@
         <li class="breadcrumb-item active">
           <a href="#">Edit</a>
         </li>
-      </ol>
+        @endif
+        </ol>
     </nav><!-- /.breadcrumb -->
     <!-- title -->
 
@@ -35,7 +43,7 @@
   <div class="card">
     <!-- .card-body -->
     <div class="card-body">
-      <h4 class="card-title"> Edit User
+      <h4 class="card-title"> Edit Profile
       <a href="{{ route('users.list') }}" class="btn btn-primary text-white btn-sm pull-right">@lang('translation.back')</a>
     </h4><!-- form .needs-validation -->
       <form method="post" onsubmit="return false">
@@ -69,10 +77,11 @@
                 <input type="text" value="{{ $user->id_card_number }}" placeholder="Enter CNIC number" class="form-control" id="cnic_number">
                 <small id="cnic_number_error" class="text-danger"></small>
             </div>
+
         </div>
         <div class="row mt-2">
             <div class="col-md-5 col-lg-5 mb-3">
-                <label for="password">Password<button class="btn btn-success btn-sm" id="generate_password" style="padding: 2px 12px 2px 12px !important"><span class="fa fa-plus"></span> Generate</button></label>
+                <label for="password">Password</label>
                 <input type="password" class="form-control" value="{{ $user->real_password }}"  name="password" id="password" placeholder="Enter password" autofocus/>
                 <span class="form-text text-danger" id="password_error"></span>
             </div>
@@ -82,7 +91,7 @@
                 <span class="form-text text-danger" id="confirm_password_error"></span>
             </div>
             <div class="col-md-2 col-lg-2 mb-2 mt-4">
-                <input type="checkbox" onclick="passwordShowHide()">Show Password
+                {{-- <input type="checkbox" onclick="passwordShowHide()">Show Password --}}
             </div>
         </div>
         <div class="col-md-12 col-lg-12 mb-4">
@@ -106,7 +115,6 @@
   </form><!-- /form .needs-validation -->
 </div><!-- /.card-body -->
   </div>
-</div>
 </div>
 @include('admin.users.js.edit')
 @endsection
