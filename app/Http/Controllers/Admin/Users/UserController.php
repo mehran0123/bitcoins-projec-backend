@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
 
@@ -46,7 +46,15 @@ class UserController extends Controller
         $user->save();
         $right_code = random_int(10000, 99999).$user->id;
         $left_code = $user->id.random_int(10000, 99999);
-        User::where('id',$user->id)->update(['left_code' => $left_code,'right_code' => $right_code]);
+
+        $signup_code = random_int(100000, 999999).$user->id;
+        $data["code"] = $signup_code;
+        User::where('id',$user->id)->update(['left_code' => $left_code,'right_code' => $right_code,'remember_token' => $signup_code]);
+        $data["title"] = 'SignUp Verification Code';
+        $email = $request->email;
+              Mail::send('emails.signup-mail', $data, function($message)use($data,$email) {
+                 $message->to($email) ->subject($data["title"]);
+            });
         return 'true';
     }
      //LOAD EDIT VIEW//

@@ -16,13 +16,7 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('type')->comment(
-                                            '1 = Local bank, 2 = Binance , 3 = Coin Base ,
-                                             4 =Perfect Money , 5 = Skril , 6 = Paypal ,
-                                             7 = Wechat , 8 = Amazon Pay , 9 = Google Pay ,
-                                             10 = Apple Pay , 11 = American Express, 12 = Stripe,
-                                             13 = Square , 14 = Visa Checkout,
-                                            ');
+            $table->string('type');
             $table->string('account_no');
             $table->string('transection_fee')->nullable();
             $table->string('other_details')->nullable();

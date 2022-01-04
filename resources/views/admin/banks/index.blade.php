@@ -62,35 +62,7 @@
             <td>{{ ++$key }}</td>
             <td>{{ $bank->title}}</td>
             <td>
-                @if ($bank->type == 1)
-                {{ 'Local bank' }}
-                @elseif ($bank->type == 2)
-                {{ 'Binance' }}
-                @elseif ($bank->type == 3)
-                {{ 'Coin Base' }}
-                @elseif ($bank->type == 4)
-                {{ 'Perfect Money' }}
-                @elseif ($bank->type == 5)
-                {{ 'Skril' }}
-                @elseif ($bank->type == 6)
-                {{ 'Paypal' }}
-                @elseif ($bank->type == 7)
-                {{ 'Wechat' }}
-                @elseif ($bank->type == 8)
-                {{ 'Amazon Pay' }}
-                @elseif ($bank->type == 9)
-                {{ 'Google Pay' }}
-                @elseif ($bank->type == 10)
-                {{ 'Apple Pay' }}
-                @elseif ($bank->type == 11)
-                {{ 'American Express' }}
-                @elseif ($bank->type == 12)
-                {{ 'Stripe' }}
-                @elseif ($bank->type == 13)
-                {{ 'Square' }}
-                @else
-                {{ 'Visa Checkout' }}
-                @endif
+                {{ $bank->type }}
             </td>
             <td>{{ $bank->account_no }}</td>
             <td>{{ $bank->transection_fee !='' ?  $bank->transection_fee : 0 }}</td>

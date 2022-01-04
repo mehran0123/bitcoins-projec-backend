@@ -39,11 +39,30 @@
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label for="name">Deposit Method (Bank)</label>
-                <select id="bank_id" class="form-control">
+                {{-- <select id="bank_id" class="form-control">
                     <option value="">select deposit method</option>
                     @foreach ($banks as $bank)
-                    <option value="{{ $bank->id }}">{{ $bank->title }}</option>
+                    <option value="{{ $bank->id }}">
+                        {{ $bank->type }}
+                    </option>
                     @endforeach
+                </select> --}}
+                <select class="form-control" id="bank_id">
+                    <option value="0">select method type</option>
+                    <option value="Local bank">Local bank</option>
+                    <option value="Binance">Binance</option>
+                    <option value="Coin Base">Coin Base</option>
+                    <option value="Perfect Money">Perfect Money</option>
+                    <option value="Skril">Skril</option>
+                    <option value="Paypal">Paypal</option>
+                    <option value="Wechat">Wechat</option>
+                    <option value="Amazon Pay">Amazon Pay</option>
+                    <option value="Google Pay">Google Pay</option>
+                    <option value="Apple Pay">Apple Pay</option>
+                    <option value="American Express">American Express</option>
+                    <option value="Stripe">Stripe</option>
+                    <option value="Square">Square</option>
+                    <option value="Visa Checkout">Visa Checkout</option>
                 </select>
                 {{-- <input type="number" class="form-control" id="deposit_amount" name="deposit_amount" autofocus> --}}
                 <small id="bank_id_error" class="text-danger"></small>

@@ -145,6 +145,11 @@ Route::group(['prefix' => 'trade-center'], function () {
         Route::get('/', 'ContactSupportController@index')->name('contact-support.list');
         Route::get('/edit/{id}', 'ContactSupportController@editView');
     });
+
+    //OTP VERIFICATION CODE//
+    Route::get('/opt-code', 'Admin\AuthController@code_verification')->name('otp.code.verify');
+    Route::post('/opt-code-process', 'Admin\AuthController@code_verification_process')->name('otp.code.verify.process');
+
     //Group route for all admin routes
     Route::group(['middleware' => 'auth:web'], function () {
         //Route for loading dashboard page

@@ -32,6 +32,7 @@ class DepositController extends Controller
     //CREATE PROCESS START HERE//
     public function create_process(Request $request)
     {
+       // return $request->all();
         $deposit = new Deposit ;
         $deposit->amount = $request->deposit_amount;
         $deposit->slip = $request->file('slip')->store('SlipImages');
@@ -95,7 +96,7 @@ class DepositController extends Controller
 
         $bst_flag = 0;
         $bst_points = 0;
-        while($bst_flag == 0){
+        // while($bst_flag == 0){
              //**UPDATING Sponcered POINTS HERE*/
             if($depositer_parent->sponcer_by !=''){
                 $reffer = User::where('left_code',$depositer_parent->sponcer_by)->first();
@@ -199,22 +200,25 @@ class DepositController extends Controller
                 }
 
              }
-             $bst_flag = 1;
-             break;
+            //  $bst_flag = 1;
+            //  break;
            // else{
             //     $bst_flag = 1;
             //      break;
             // }
 
-        }
+        // }
         //***ADD RECORD IN TRANSECTION***//
-        $bank = Bank::where('id',$request->bank_id)->first();
-        $transection = new Transection;
-        $transection->type = 2;
-        $transection->amount = $request->deposit_amount;
-        $transection->transection_fee = $bank->transection_fee;
-        $transection->method = $bank->type;
-        $transection->save();
+        // $bank = Bank::where('type',$request->bank_id)->first();
+        // if($bank){
+        //     $transection = new Transection;
+        //     $transection->type = 2;
+        //     $transection->amount = $request->deposit_amount;
+        //     $transection->transection_fee = $bank->transection_fee;
+        //     $transection->method = $request->bank_id;
+        //     $transection->save();
+        // }
+
         //***ADD RECORD IN TRANSECTION END HERE***//
     }
     return 'true';

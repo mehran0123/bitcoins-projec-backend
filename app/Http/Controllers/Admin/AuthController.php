@@ -21,18 +21,37 @@ class AuthController extends Controller
             return redirect('/trade-center/dashboard');
         }
     }
+    //**VIEW OTP SCREEN */
+    public function code_verification(){
+        return view('admin.auth.otp-code');
+    }
+    //**OTP CODE PROCESS */
+    public function code_verification_process(Request $request){
+        $user = User::where('remember_token',$request->otp_code)->first();
+        if($user){
+            User::where('remember_token',$request->otp_code)->update(['is_active' => 1]);
+            return 'true';
+        }else{
+            return 'flase';
+        }
 
+    }
     //login process for admin sie
     public function login_process(Request $request)
     {
         $data = ['email' => $request->email, 'password' => $request->password];
-
+       // return 'hello';
         //checking the login data here
+        $user = User::where('email',$request->email)->first();
+        if($user->is_active == 0) {
+            Session::flash('error','please verify your account from OTP code');
+            return redirect('/trade-center/opt-code');
+        }
         if (Auth::attempt($data)) {
-            $user = Auth::user();
-
+           // return $user->is_active;
             //checking for admin login
-            if ($user->user_role == 1) {
+
+            if($user->is_active != 0) {
                 return redirect('/trade-center/dashboard');
             } else {
                 //redirecting to login page if user try to login

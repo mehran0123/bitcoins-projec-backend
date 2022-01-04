@@ -40,20 +40,20 @@
             <label for="type">Type</label>
             <select class="form-control" id="type">
                 <option value="0">select account type</option>
-                <option value="1" @if($bank->type == 1) {{'selected'}} @endif>Local bank</option>
-                <option value="2" @if($bank->type == 2) {{'selected'}} @endif>Binance</option>
-                <option value="3" @if($bank->type == 3) {{'selected'}} @endif>Coin Base</option>
-                <option value="4" @if($bank->type == 4) {{'selected'}} @endif>Perfect Money</option>
-                <option value="5" @if($bank->type == 5) {{'selected'}} @endif>Skril</option>
-                <option value="6" @if($bank->type == 6) {{'selected'}} @endif>Paypal</option>
-                <option value="7" @if($bank->type == 7) {{'selected'}} @endif>Wechat</option>
-                <option value="8" @if($bank->type == 8) {{'selected'}} @endif>Amazon Pay</option>
-                <option value="9" @if($bank->type == 9) {{'selected'}} @endif>Google Pay</option>
-                <option value="10" @if($bank->type == 10) {{'selected'}} @endif>Apple Pay</option>
-                <option value="11" @if($bank->type == 11) {{'selected'}} @endif>American Express</option>
-                <option value="12" @if($bank->type == 12) {{'selected'}} @endif>Stripe</option>
-                <option value="13" @if($bank->type == 13) {{'selected'}} @endif>Square</option>
-                <option value="14" @if($bank->type == 14) {{'selected'}} @endif>Visa Checkout</option>
+                <option value="Local bank" @if($bank->type == "Local bank") {{'selected'}} @endif>Local bank</option>
+                <option value="Binance" @if($bank->type == "Binance") {{'selected'}} @endif>Binance</option>
+                <option value="Coin Base" @if($bank->type == "Coin Base") {{'selected'}} @endif>Coin Base</option>
+                <option value="Perfect Money" @if($bank->type == "Perfect Money") {{'selected'}} @endif>Perfect Money</option>
+                <option value="Skril" @if($bank->type == "Skril") {{'selected'}} @endif>Skril</option>
+                <option value="Paypal" @if($bank->type == "Paypal") {{'selected'}} @endif>Paypal</option>
+                <option value="Wechat" @if($bank->type == "Wechat") {{'selected'}} @endif>Wechat</option>
+                <option value="Amazon Pay" @if($bank->type == "Amazon Pay") {{'selected'}} @endif>Amazon Pay</option>
+                <option value="Google Pay" @if($bank->type == "Google Pay") {{'selected'}} @endif>Google Pay</option>
+                <option value="Apple Pay" @if($bank->type == "Apple Pay") {{'selected'}} @endif>Apple Pay</option>
+                <option value="American Express" @if($bank->type == "American Express") {{'selected'}} @endif>American Express</option>
+                <option value="Stripe" @if($bank->type == "Stripe") {{'selected'}} @endif>Stripe</option>
+                <option value="Square" @if($bank->type == "Square") {{'selected'}} @endif>Square</option>
+                <option value="Visa Checkout" @if($bank->type == "Visa Checkout") {{'selected'}} @endif>Visa Checkout</option>
             </select>
             <small id="type_error" class="text-danger"></small>
         </div>

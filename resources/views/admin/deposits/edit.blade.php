@@ -42,7 +42,7 @@
                 <select id="bank_id" class="form-control">
                     <option value="">select deposit method</option>
                     @foreach ($banks as $bank)
-                    <option value="{{ $bank->id }}" @if($deposit->bank_id ==$bank->id ) @endif>{{ $bank->title }}</option>
+                    <option value="{{ $bank->id }}" @if($deposit->bank_id == $bank->id ) @endif>{{ $bank->type }}</option>
                     @endforeach
                 </select>
                 {{-- <input type="number" class="form-control" id="deposit_amount" name="deposit_amount" autofocus> --}}

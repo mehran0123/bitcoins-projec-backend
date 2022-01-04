@@ -14,8 +14,8 @@ class DepositTableUpdate extends Migration
     public function up()
     {
         Schema::table('deposits', function (Blueprint $table) {
-            $table->unsignedBigInteger('bank_id');
-            $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');
+            $table->string('bank_id');
+            // $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');
         });
     }
 

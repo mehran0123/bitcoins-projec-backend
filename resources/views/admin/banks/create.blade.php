@@ -40,20 +40,20 @@
             <label for="type">Type</label>
             <select class="form-control" id="type">
                 <option value="0">select account type</option>
-                <option value="1">Local bank</option>
-                <option value="2">Binance</option>
-                <option value="3">Coin Base</option>
-                <option value="4">Perfect Money</option>
-                <option value="5">Skril</option>
-                <option value="6">Paypal</option>
-                <option value="7">Wechat</option>
-                <option value="8">Amazon Pay</option>
-                <option value="9">Google Pay</option>
-                <option value="10">Apple Pay</option>
-                <option value="11">American Express</option>
-                <option value="12">Stripe</option>
-                <option value="13">Square</option>
-                <option value="14">Visa Checkout</option>
+                <option value="Local bank">Local bank</option>
+                <option value="Binance">Binance</option>
+                <option value="Coin Base">Coin Base</option>
+                <option value="Perfect Money">Perfect Money</option>
+                <option value="Skril">Skril</option>
+                <option value="Paypal">Paypal</option>
+                <option value="Wechat">Wechat</option>
+                <option value="Amazon Pay">Amazon Pay</option>
+                <option value="Google Pay">Google Pay</option>
+                <option value="Apple Pay">Apple Pay</option>
+                <option value="American Express">American Express</option>
+                <option value="Stripe">Stripe</option>
+                <option value="Square">Square</option>
+                <option value="Visa Checkout">Visa Checkout</option>
             </select>
             <small id="type_error" class="text-danger"></small>
         </div>
