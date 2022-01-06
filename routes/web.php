@@ -121,6 +121,7 @@ Route::group(['prefix' => 'trade-center'], function () {
 
     Route::group(['prefix' => 'percentage'], function () {
         Route::get('/',[PercentageController::class,'index'])->name('percentage.list');
+        Route::get('/daily-bonus',[PercentageController::class,'daily_bounes'])->name('daily.bonus.list');
         Route::get('/percentage-create', [PercentageController::class,'createView'])->name('percentage.create');
         Route::post('/create-process', [PercentageController::class,'create_process'])->name('percentage.create-process');
         Route::get('/edit/{id}', [PercentageController::class,'edit'])->name('percentage.edit');

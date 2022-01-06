@@ -359,7 +359,7 @@
 						</span>
 						</a>
 						<ul class="treeview-menu">
-							<li><a href=""><i class="ti-more"></i>Daily Bonus</a></li>
+							<li><a href="{{ route('daily.bonus.list') }}"><i class="ti-more"></i>Daily Bonus</a></li>
 						</ul>
 					</li>
 					<li class="treeview">

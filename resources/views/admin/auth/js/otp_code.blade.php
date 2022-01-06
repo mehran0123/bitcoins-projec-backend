@@ -29,7 +29,7 @@ $('#send_otp').click(function(){
                 success:function(res){
                     //return console.log(res);
                 if(res == "true"){
-                    window.location = "{{ route('trade-center') }}"
+                    window.location = "{{ route('trade-center') }}";
                 }else{
                     return $('#message').html('<span class="text-danger text-center">OTP Incorrect,Please Try Again!</span>');
                 }

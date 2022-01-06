@@ -47,7 +47,8 @@
         </tr>
       </thead>
       <tbody id="partial-view">
-@if ($percentage !='')
+@if (count($percentages) > 0)
+@foreach ($percentages as $key => $percentage)
   <tr id="row_{{ $percentage->id }}">
       <td class="text-left">{{ $percentage->id }}</td>
        <td>
@@ -66,6 +67,7 @@
           </a> --}}
         </td>
     </tr>
+@endforeach
 @endif
       </tbody>
       <tfoot>
