@@ -20,7 +20,7 @@ class CreateWithdrawsTable extends Migration
             $table->string('phone');
             $table->string('cnic');
             $table->date('dob');
-            $table->double('amount');
+            $table->double('amount',16,2);
             $table->date('withdraw_date');
             $table->string('service_type');  //Local Bank , Binace Bank , Paypal
             $table->text('address');

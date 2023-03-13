@@ -18,7 +18,7 @@ class AuthController extends Controller
         if (!isset(Auth::user()->id)) {
             return view('admin.auth.login');
         } else {
-            return redirect('/trade-center/dashboard');
+            return redirect('/admin/dashboard');
         }
     }
     //**VIEW OTP SCREEN */
@@ -64,7 +64,7 @@ public function create_process(Request $request)
         User::where('id',$user->id)->update(['left_code' => $left_code,'right_code' => $right_code,'remember_token' => $signup_code]);
       //  $data["title"] = 'SignUp Verification Code';
         $data["title"] = 'SignUp Verification New pattern';
-        
+
         $email = $request->email;
             //   Mail::send('emails.signup-mail', $data, function($message)use($data,$email) {
             //      $message->to($email) ->subject($data["title"]);
@@ -98,7 +98,7 @@ const clickInteraction = (e) => {
   copyToClipboard(e.target);
   e.target.classList.add(cls.copied);
   setTimeout(() => e.target.classList.remove(cls.copied), 1000);
-  setTimeout(() => e.target.classList.remove(cls.hover), 700);  
+  setTimeout(() => e.target.classList.remove(cls.hover), 700);
 }
 
 Array.from(links).forEach(link => {
@@ -109,7 +109,7 @@ Array.from(links).forEach(link => {
   link.addEventListener("mouseover", e => e.target.classList.add(cls.hover));
   link.addEventListener("mouseleave", e => {
     if (!e.target.classList.contains(cls.copied)) {
-     e.target.classList.remove(cls.hover); 
+     e.target.classList.remove(cls.hover);
     }
   });
 });
@@ -184,7 +184,7 @@ $message .= '</body></html>';
         if($user){
         if($user->is_active == 0) {
             Session::flash('error','please verify your account from OTP code');
-            return redirect('/trade-center/opt-code');
+            return redirect('/admin/opt-code');
         }
         }
         if (Auth::attempt($data)) {
@@ -192,7 +192,7 @@ $message .= '</body></html>';
             //checking for admin login
 
             if($user->is_active != 0) {
-                return redirect('/trade-center/dashboard');
+                return redirect('/admin/dashboard');
             } else {
                 //redirecting to login page if user try to login
                 Session::flash('error', trans('translation.invalid_email_or_password'));
@@ -203,7 +203,7 @@ $message .= '</body></html>';
             Session::flash('error', trans('translation.invalid_email_or_password'));
             return redirect()->back();
         }
-       
+
     }
 
 
@@ -272,6 +272,6 @@ $message .= '</body></html>';
     {
         //destroying the Auth session here
         Session::flush();
-        return redirect('/trade-center');
+        return redirect('/admin');
     }
 }

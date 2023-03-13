@@ -50,23 +50,23 @@ Route::get('/email', function () {
 });
 
 Route::get('/', function () {
-    return redirect('/trade-center');
+    return redirect('/admin');
 });
 
 //Group Routes With Admin Language Middleware for hadnling localisation
 
-Route::group(['prefix' => 'trade-center'], function () {
+Route::group(['prefix' => 'admin'], function () {
 
     //////////////Admin Side Routes////////////////////
     //Route for loading admin login page
        Route::get('reports/transactions', 'Admin\TransectionController@transactions');
        Route::get('reports/deposits-transactions','Admin\TransectionController@deposits_transactions');
-   
+
     Route::get('reports/withdraws-transactions', function() {
         return view('admin.dashboard.withdraw-report');
     });
- 
-    Route::get('/', 'Admin\AuthController@index')->name('trade-center');
+
+    Route::get('/', 'Admin\AuthController@index')->name('admin');
     //Route for loading referfriend page
     Route::get('/register', 'Admin\AuthController@register');
     Route::get('/referfriends', 'Admin\ReferFriendsController@index');
