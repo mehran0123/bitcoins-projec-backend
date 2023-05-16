@@ -71,11 +71,11 @@
                                 <input type="text" placeholder="Enter CNIC number" class="form-control" id="cnic_number">
                                 <small id="cnic_number_error" class="text-danger"></small>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="sponcer_by">Sponcer By (Referral No.)</label>
                                 <input type="text" placeholder="Enter Referral No." class="form-control" id="sponcer_by">
                                 <small id="sponcer_by_error" class="text-danger"></small>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-5 col-lg-5 mb-3">

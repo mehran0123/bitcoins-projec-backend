@@ -571,64 +571,7 @@
                         </ul>
                     </li>
 
-                    {{-- <li class="treeview">
-                        <a href="#">
-                            <i class="ti-panel"></i>
-                            <span>Ranks</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href=""><i class="ti-more"></i>Status</a></li>
-                            <li><a href=""><i class="ti-more"></i>Ranks / Achivement</a></li>
-                        </ul>
-                    </li> --}}
-
-                    {{-- <li class="treeview">
-                        <a href="#">
-                            <i class="ti-wallet"></i>
-                            <span>Daily Earning</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ route('daily.bonus.list') }}"><i class="ti-more"></i>Daily Earning</a>
-                            </li>
-                        </ul>
-                    </li> --}}
-
-                    {{-- <li class="treeview">
-                        <a href="#">
-                            <i class="ti-stats-up"></i>
-                            <span>Refer Friends</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ URL::to('/admin/referfriends') }}"><i class="ti-more"></i>Refer a
-                                    Friend</a></li>
-                        </ul>
-                    </li>
-                   --}}
-                    {{-- @if (Auth::user()->user_role == 1)
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="ti-files"></i>
-                                <span>Transaction Method</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="{{ URL::to('/admin/bank') }}"><i class="ti-more"></i>Manage Method</a>
-                                </li>
-                                <li><a href="{{ URL::to('/admin/bank/create') }}"><i class="ti-more"></i>Add
-                                        Method</a></li>
-                            </ul>
-                        </li>
+                    @if (Auth::user()->user_role == 1)
                         <li class="treeview">
                             <a href="#">
                                 <i class="ti-files"></i>
@@ -640,42 +583,11 @@
                             <ul class="treeview-menu">
                                 <li><a href="{{ URL::to('/admin/users') }}"><i class="ti-more"></i>Manage Users</a>
                                 </li>
-                                <li><a href="{{ URL::to('/admin/Users/create') }}"><i class="ti-more"></i>Add
+                                <li><a href="{{ URL::to('/admin/users/create') }}"><i class="ti-more"></i>Add
                                         Users</a></li>
                             </ul>
                         </li>
-
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="ti-files"></i>
-                                <span>Percentage</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="{{ URL::to('/admin/percentage') }}"><i class="ti-more"></i>Manage
-                                        Percentage</a></li>
-                                <li><a href="{{ URL::to('/admin/percentage/percentage-create') }}"><i
-                                            class="ti-more"></i>Add Percentage</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="ti-files"></i>
-                                <span>Manage Slider</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="{{ URL::to('/admin/sliders') }}"><i class="ti-more"></i>Manage
-                                        Slider</a></li>
-                                <li><a href="{{ URL::to('/admin/sliders/create') }}"><i class="ti-more"></i>Add
-                                        Slider</a></li>
-                            </ul>
-                        </li>
-                    @endif --}}
+                    @endif
 
                     {{-- <li class="treeview">
                         <a href="#">

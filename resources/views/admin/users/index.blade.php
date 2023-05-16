@@ -53,7 +53,6 @@
                                     <th> Name </th>
                                     <th> Email </th>
                                     <th> Deposits </th>
-                                    <th> Points </th>
                                     <th class="text-center"> Status </th>
                                     <th class="text-center"> Action </th>
                                 </tr>
@@ -66,7 +65,6 @@
                                             <td>{{ $user->first_name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td> {{ $user->total_deposit }} </td>
-                                            <td>{{ $user->points != '' ? $user->points : 0 }}</td>
                                             <td class="text-center">
                                                 <input type="hidden" name="id" value="{{ $user->id }}">
                                                 @if ($user->is_active == 1)
@@ -101,7 +99,6 @@
                                     <th> Name </th>
                                     <th> Email </th>
                                     <th> Password </th>
-                                    <th> Points </th>
                                     <th class="text-center"> Status </th>
                                     <th class="text-center"> Action </th>
                                 </tr>
